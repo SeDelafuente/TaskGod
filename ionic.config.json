@@ -1,0 +1,7 @@
+{
+  "name": "TaskGod",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
