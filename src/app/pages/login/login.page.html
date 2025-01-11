@@ -1,47 +1,44 @@
-<ion-header [translucent]="true">
-</ion-header>
+<ion-header [translucent]="true"></ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-  </ion-header>
-
+<ion-content [fullscreen]="true" class="login-page">
+  <!-- Logo -->
   <div class="logo-container">
-    <img src="../../../assets/img/TaskGod logo.png" alt="logo" class="logo">
+    <img src="../../../assets/img/TaskGod logo.png" alt="TaskGod Logo" class="logo">
   </div>
 
+  <!-- Título debajo del logo -->
   <div class="subtitle-logo">
     <h1>GESTOR DE TAREAS</h1>
   </div>
 
-    <div class="form-container">
-      <form (ngSubmit)="onSubmit()">
-        <ion-item>
-          <ion-label position="floating">Correo electrónico</ion-label>
-          <ion-input type="email" [(ngModel)]="email" name="email" required></ion-input>
-        </ion-item>
+  <!-- Formulario -->
+  <div class="form-container">
+    <form (ngSubmit)="onSubmit()">
+      <!-- Input de Correo -->
+      <ion-item>
+        <ion-icon name="person-circle-outline" slot="start"></ion-icon>
+        <ion-input type="email" placeholder="Correo" [(ngModel)]="email" name="email" required></ion-input>
+      </ion-item>
 
-        <ion-item>
-          <ion-label position="floating">Contraseña</ion-label>
-          <ion-input [type]="passwordType" [(ngModel)]="password" name="password" required></ion-input>
-          <ion-icon [name]="passwordType === 'password' ? 'eye-off' : 'eye'" (click)="togglePasswordType()"></ion-icon>
-        </ion-item>
+      <!-- Input de Contraseña -->
+      <ion-item>
+        <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+        <ion-input [type]="passwordType" placeholder="Contraseña" [(ngModel)]="password" name="password" required></ion-input>
+        <ion-icon [name]="passwordType === 'password' ? 'eye-off' : 'eye'" slot="end" (click)="togglePasswordType()"></ion-icon>
+      </ion-item>
 
-        <ion-button type="submit" expand="block">Iniciar sesión</ion-button>
-      </form>
-    </div>
+      <!-- Olivdaste tú contraseña -->
+      <ion-item lines="none">
+        <a class="forget-password" (click)="goToForget()">¿Olvidaste tu contraseña?</a>
+      </ion-item>
 
-      <div class="nav-container">
-        <div class="register-container">
-        <ion-button (click)="goToRegister()" expand="block" fill="clear" shape="round">
-          registrarse
-        </ion-button>
-      </div>
+      <!-- Botón de Iniciar sesión -->
+      <ion-button type="submit" expand="block" class="login-button">Iniciar sesión</ion-button>
+    </form>
+  </div>
 
-        <div class="forget-container">
-        <ion-button (click)="goToForget()" expand="block" fill="clear" shape="round">
-          ¿olvidaste tú contraseña?
-        </ion-button>
-       </div>
-      </div>
-
+  <!-- Navegación -->
+  <div class="nav-container">
+    <p>¿No tienes una cuenta? <a (click)="goToRegister()">Registrarse</a></p>
+  </div>
 </ion-content>
