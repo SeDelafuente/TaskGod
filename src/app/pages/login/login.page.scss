@@ -45,7 +45,7 @@ ion-item {
   margin-bottom: 15px;
   border-radius: 30px;
   background-color: #ffffff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(245, 245, 245, 0.1);
 }
 
 ion-icon {
@@ -60,14 +60,14 @@ ion-icon {
 
   --color: rgb(0, 0, 0);
 
-  --border-radius: 30px; // Mantiene el diseño redondeado
-  --border-color: #008c94; // Un borde sutil con un tono similar al color base
+  --border-radius: 30px;
+  --border-color: #008c94;
   --border-style: solid;
   --border-width: 2px;
 
   --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 
-  --ripple-color: #ffffff; // Efecto ripple en blanco
+  --ripple-color: #ffffff;
 
   --padding-top: 12px;
   --padding-bottom: 12px;
@@ -76,12 +76,12 @@ ion-icon {
 
   font-size: 1rem;
   font-weight: bold;
-  text-transform: uppercase; // Para resaltar más el texto
+  text-transform: uppercase;
 }
 
 
 .forget-password {
-  color: #3498db !important;
+  color: #00a4ac;
   font-size: 0.9rem;
   text-align: right;
 }
