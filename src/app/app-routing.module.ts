@@ -103,6 +103,10 @@ const routes: Routes = [
     path: 'help',
     loadChildren: () => import('./pages/help/help.module').then( m => m.HelpPageModule)
   },
+  {
+    path: '**',
+    loadChildren: () => import('./pages/error404/error404.module').then( m => m.Error404PageModule)
+  },
 ];
 
 @NgModule({
