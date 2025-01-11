@@ -1,0 +1,48 @@
+:host {
+  --ion-background-color: #d9d9d9;
+  --ion-text-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+};
+
+  .logo-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+ .logo{
+  display: flex;
+  border-radius: 20rem;
+ }
+
+  .subtitle-logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .form-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+
+  .register-container{
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    border-radius: 10px;
+  }
+
+  .forget-container {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    border-radius: 10px;
+  }
+
