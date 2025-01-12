@@ -1,0 +1,102 @@
+:host {
+  --ion-background-color: #d9d9d9;
+  --ion-text-color: #000;
+}
+
+.homepage-user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.title-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.title-container h1 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #000;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.title-container span {
+  font-size: 1.5rem;
+  color: #444;
+}
+
+.profile-container {
+  margin: 20px 0;
+  text-align: center;
+  cursor: pointer;
+}
+
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  object-fit: cover;
+}
+
+.tasks-container {
+  width: 90%;
+  max-width: 400px;
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin: auto;
+}
+
+.tasks-container h2 {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.tasks-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.task-button {
+  --background: #00c4cc;
+  --background-hover: #00b4bc;
+  --background-activated: #00a4ac;
+  --background-focused: #00a4ac;
+
+  --color: #fff;
+  --border-radius: 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: 20px;
+  width: 48%;
+}
+
+.tasks-icons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  text-align: center;
+}
+
+.icon-button ion-icon {
+  font-size: 2rem;
+  color: #fff;
+}
+
+.help-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  height: 100%;
+  padding: 0;
+}
+

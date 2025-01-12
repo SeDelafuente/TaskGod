@@ -1,0 +1,19 @@
+:host {
+  --ion-background-color: #d9d9d9;
+  --ion-text-color: #000;
+}
+
+.error404-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+}
+
+.icon-container img {
+  width: auto;
+  height: auto;
+  margin-top: 20px;
+}

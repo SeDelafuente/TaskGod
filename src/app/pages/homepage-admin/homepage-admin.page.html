@@ -1,13 +1,43 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>homepage-admin</ion-title>
+    <!-- Botón de regreso (Back) -->
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <!-- Botón de ayuda centrado -->
+    <ion-buttons>
+      <ion-button class="help-button" (click)="goToHelp()">
+        <ion-icon name="help-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <!-- Botón de cerrar sesión a la derecha -->
+    <ion-buttons slot="end">
+      <ion-button (click)="goToLogin()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">homepage-admin</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="homepage-user">
+  <!-- Bienvenida -->
+  <div class="title-container">
+    <h1>BIENVENIDO<br><span>{{ username }}</span></h1>
+  </div>
+
+  <!-- Imagen de perfil -->
+  <div class="profile-container" (click)="goToProfile()">
+    <img src="../../../assets/img/profile-placeholder.png" alt="Perfil" class="profile-img">
+  </div>
+
+  <!-- Tareas -->
+  <div class="tasks-container">
+    <h2>Menú de control</h2>
+    <div class="tasks-buttons">
+      <ion-button class="task-button" (click)="goToUsers()">Usuarios</ion-button>
+      <ion-button class="task-button" (click)="goToProblems()">Problemas</ion-button>
+    </div>
+  </div>
 </ion-content>
