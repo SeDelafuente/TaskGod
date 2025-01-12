@@ -1,13 +1,58 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>profile</ion-title>
+    <!-- Botón de regreso -->
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <!-- Botón de ayuda centrado -->
+    <ion-buttons>
+      <ion-button class="help-button" (click)="goToHelp()">
+        <ion-icon name="help-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <!-- Botón de cerrar sesión a la derecha -->
+    <ion-buttons slot="end">
+      <ion-button (click)="goToLogin()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">profile</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="profile-page">
+  <!-- Bienvenida -->
+  <div class="title-container">
+    <h1>BIENVENIDO<br><span>{{ username }}</span></h1>
+  </div>
+
+  <!-- Imagen de perfil -->
+  <div class="profile-container">
+    <img src="../../../assets/img/profile-placeholder.png" alt="Perfil" class="profile-img">
+    <ion-button class="refresh-button">
+      <ion-icon name="refresh-outline"></ion-icon>
+    </ion-button>
+  </div>
+
+  <!-- Formulario -->
+  <div class="form-container">
+    <ion-item>
+      <ion-icon name="mail-outline" slot="start"></ion-icon>
+      <ion-input placeholder="Correo" [(ngModel)]="email" readonly></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="person-outline" slot="start"></ion-icon>
+      <ion-input placeholder="Nombre de usuario" [(ngModel)]="username" readonly></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+      <ion-input placeholder="Contraseña" type="password" [(ngModel)]="password" readonly></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" class="change-password-button" (click)="goToChangePassword()">Cambiar contraseña</ion-button>
+    <ion-button expand="block" class="change-username-button" (click)="goToChangeUsername()">Cambiar nombre de usuario</ion-button>
+  </div>
 </ion-content>
