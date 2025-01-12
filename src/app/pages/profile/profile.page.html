@@ -1,18 +1,15 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <!-- Botón de regreso -->
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
 
-    <!-- Botón de ayuda centrado -->
     <ion-buttons>
       <ion-button class="help-button" (click)="goToHelp()">
         <ion-icon name="help-circle-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
 
-    <!-- Botón de cerrar sesión a la derecha -->
     <ion-buttons slot="end">
       <ion-button (click)="goToLogin()">
         <ion-icon name="log-out-outline"></ion-icon>
