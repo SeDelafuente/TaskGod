@@ -24,18 +24,18 @@ export class LoginPage implements OnInit {
 
   // Simula un inicio de sesión usando localStorage
   onSubmit() {
-    const registeredUsers = JSON.parse(localStorage.getItem('users') || '[]');
+    // const registeredUsers = JSON.parse(localStorage.getItem('users') || '[]');
 
-    const userFound = registeredUsers.find((user: any) => user.email === this.email && user.password === this.password);
+    // const userFound = registeredUsers.find((user: any) => user.email === this.email && user.password === this.password);
 
-    if (userFound) {
-      console.log('Inicio de sesión exitoso');
-      alert('Inicio de sesión exitoso');
-      this.router.navigate(['/home']); // Redirecciona a la página de inicio
-    } else {
-      console.log('Credenciales incorrectas');
-      alert('Correo o contraseña incorrectos');
-    }
+    // if (userFound) {
+    //   console.log('Inicio de sesión exitoso');
+    //   alert('Inicio de sesión exitoso');
+    //   this.router.navigate(['/home']); // Redirecciona a la página de inicio
+    // } else {
+    //   console.log('Credenciales incorrectas');
+    //   alert('Correo o contraseña incorrectos');
+    // }
   }
 
   goToRegister() {
@@ -45,4 +45,8 @@ export class LoginPage implements OnInit {
   goToForget(){
     this.router.navigate(['/forget-password'])
   }
+
+  goToUserHome() {
+    this.router.navigate(['/homepage-user']);
+}
 }
