@@ -1,13 +1,54 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>change-username</ion-title>
+    <!-- Botón de regreso -->
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <!-- Botón de ayuda centrado -->
+    <ion-buttons>
+      <ion-button class="help-button" (click)="goToHelp()">
+        <ion-icon name="help-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+      <ion-buttons slot="end">
+        <ion-button (click)="goToLogin()">
+          <ion-icon name="log-out-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">change-username</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="change-username-page">
+  <!-- Título -->
+  <div class="title-container">
+    <h1>CAMBIA TÚ<br>NOMBRE DE USUARIO</h1>
+  </div>
+
+  <!-- Formulario -->
+  <div class="form-container">
+    <form (ngSubmit)="onSubmit()">
+      <!-- Nombre de usuario actual -->
+      <ion-item>
+        <ion-input
+          placeholder="{{ currentUsername }}"
+          [disabled]="true"
+        ></ion-input>
+      </ion-item>
+
+      <!-- Nuevo nombre de usuario -->
+      <ion-item>
+        <ion-input
+          placeholder="Ingresa tú nuevo nombre de usuario"
+          [(ngModel)]="newUsername"
+          name="newUsername"
+          required
+        ></ion-input>
+      </ion-item>
+
+      <!-- Botón de cambiar nombre -->
+      <ion-button expand="block" class="submit-button" type="submit">Cambiar nombre</ion-button>
+    </form>
+  </div>
 </ion-content>
