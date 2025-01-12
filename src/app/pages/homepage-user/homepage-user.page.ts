@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   standalone: false,
 })
 export class HomepageUserPage {
-  username: string = 'Username'; // Reemplaza con datos dinámicos si es necesario
+  username: string = 'Username';
 
   constructor(private router: Router) {}
 
