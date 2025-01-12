@@ -65,14 +65,18 @@
 }
 
 .task-button {
-  width: 48%;
-  border-radius: 15px;
-  background-color: #00c4cc;
-  color: #fff;
+  --background: #00c4cc;
+  --background-hover: #00b4bc;
+  --background-activated: #00a4ac;
+  --background-focused: #00a4ac;
+
+  --color: #fff;
+  --border-radius: 30px;
   font-size: 1rem;
   font-weight: bold;
   text-transform: uppercase;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin-top: 20px;
+  width: 48%;
 }
 
 .tasks-icons {
@@ -82,20 +86,75 @@
   text-align: center;
 }
 
-.icon-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 15px;
-  background-color: #00c4cc;
-  color: #fff;
-  font-size: 1.5rem;
-  width: 100%;
-  height: 80px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
 .icon-button ion-icon {
   font-size: 2rem;
   color: #fff;
 }
+
+
+
+.responsability-button {
+  --background: #007bff;
+  --background-hover: #0069d9;
+  --background-activated: #0056b3;
+  --background-focused: #0056b3;
+
+  --color: #fff;
+  --border-radius: 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: 20px;
+}
+
+.exercise-button {
+  --background: #00c4cc;
+  --background-hover: #00b4bc;
+  --background-activated: #00a4ac;
+  --background-focused: #00a4ac;
+
+  --color: #fff;
+  --border-radius: 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: 20px;
+}
+
+.selfcare-button {
+  --background: #ff66b2;
+  --background-hover: #e0559d;
+  --background-activated: #c9458a;
+  --background-focused: #c9458a;
+
+  --color: #fff;
+  --border-radius: 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: 20px;
+}
+
+.economic-button {
+  --background: #28a745;
+  --background-hover: #218838;
+  --background-activated: #1e7e34;
+  --background-focused: #1e7e34;
+
+  --color: #fff;
+  --border-radius: 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-top: 20px;
+}
+
+.help-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  height: 100%;
+  padding: 0;
+}
+

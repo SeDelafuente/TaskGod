@@ -1,13 +1,20 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <!-- Botón de regreso (Back) -->
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-button>
+
+    <!-- Botón de ayuda centrado -->
+    <ion-buttons>
+      <ion-button class="help-button" (click)="goToHelp()">
         <ion-icon name="help-circle-outline"></ion-icon>
       </ion-button>
-      <ion-button>
+    </ion-buttons>
+
+    <!-- Botón de cerrar sesión a la derecha -->
+    <ion-buttons slot="end">
+      <ion-button (click)="goToLogin()">
         <ion-icon name="log-out-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -34,16 +41,16 @@
     </div>
 
     <div class="tasks-icons">
-      <ion-button class="icon-button" (click)="goToResponsability()">
+      <ion-button class="responsability-button" (click)="goToResponsability()">
         <ion-icon src="../../../assets/svg/briefcase-outline.svg"></ion-icon>
       </ion-button>
-      <ion-button class="icon-button" (click)="goToExercise()">
+      <ion-button class="exercise-button" (click)="goToExercise()">
         <ion-icon src="../../../assets/svg/barbell-outline.svg"></ion-icon>
       </ion-button>
-      <ion-button class="icon-button" (click)="goToSelfcare()">
+      <ion-button class="selfcare-button" (click)="goToSelfcare()">
         <ion-icon src="../../../assets/svg/medkit-outline.svg"></ion-icon>
       </ion-button>
-      <ion-button class="icon-button" (click)="goToEconomic()">
+      <ion-button class="economic-button" (click)="goToEconomic()">
         <ion-icon src="../../../assets/svg/wallet-outline.svg"></ion-icon>
       </ion-button>
     </div>

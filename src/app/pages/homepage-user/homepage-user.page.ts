@@ -41,6 +41,10 @@ export class HomepageUserPage {
   }
 
   goToHelp() {
-  this.router.navigate(['/help']);
+    this.router.navigate(['/help']);
+  }
+
+  goToLogin(){
+    this.router.navigate(['/login']);
   }
 }
