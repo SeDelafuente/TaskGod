@@ -1,13 +1,51 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>homepage-user</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="help-circle-outline"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">homepage-user</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="homepage-user">
+  <!-- Bienvenida -->
+  <div class="title-container">
+    <h1>BIENVENIDO<br><span>{{ username }}</span></h1>
+  </div>
+
+  <!-- Imagen de perfil -->
+  <div class="profile-container" (click)="goToProfile()">
+    <img src="../../../assets/img/profile-placeholder.png" alt="Perfil" class="profile-img">
+  </div>
+
+  <!-- Tareas -->
+  <div class="tasks-container">
+    <h2>MIS TAREAS</h2>
+    <div class="tasks-buttons">
+      <ion-button class="task-button" (click)="goToDiary()">DIARIAS</ion-button>
+      <ion-button class="task-button" (click)="goToMonthly()">MENSUALES</ion-button>
+    </div>
+
+    <div class="tasks-icons">
+      <ion-button class="icon-button" (click)="goToResponsability()">
+        <ion-icon src="../../../assets/svg/briefcase-outline.svg"></ion-icon>
+      </ion-button>
+      <ion-button class="icon-button" (click)="goToExercise()">
+        <ion-icon src="../../../assets/svg/barbell-outline.svg"></ion-icon>
+      </ion-button>
+      <ion-button class="icon-button" (click)="goToSelfcare()">
+        <ion-icon src="../../../assets/svg/medkit-outline.svg"></ion-icon>
+      </ion-button>
+      <ion-button class="icon-button" (click)="goToEconomic()">
+        <ion-icon src="../../../assets/svg/wallet-outline.svg"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
 </ion-content>

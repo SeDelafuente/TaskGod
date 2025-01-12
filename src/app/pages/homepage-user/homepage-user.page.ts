@@ -1,16 +1,46 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-homepage-user',
   templateUrl: './homepage-user.page.html',
   styleUrls: ['./homepage-user.page.scss'],
-  standalone: false
+  standalone: false,
 })
-export class HomepageUserPage implements OnInit {
+export class HomepageUserPage {
+  username: string = 'Username'; // Reemplaza con datos dinámicos si es necesario
 
-  constructor() { }
+  constructor(private router: Router) {}
 
-  ngOnInit() {
+  goToProfile() {
+    this.router.navigate(['/profile']);
   }
 
+  goToDiary() {
+    this.router.navigate(['/diary']);
+  }
+
+  goToMonthly() {
+    this.router.navigate(['/monthly']);
+  }
+
+  goToResponsability() {
+    this.router.navigate(['/responsability']);
+  }
+
+  goToExercise() {
+    this.router.navigate(['/exercise']);
+  }
+
+  goToSelfcare() {
+    this.router.navigate(['/selfcare']);
+  }
+
+  goToEconomic() {
+    this.router.navigate(['/economic']);
+  }
+
+  goToHelp() {
+  this.router.navigate(['/help']);
+  }
 }
