@@ -1,13 +1,31 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>problems</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToLogin()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">problems</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="problems-page">
+  <div class="title-container">
+    <h1>PROBLEMAS</h1>
+  </div>
+
+  <ion-list>
+    <ion-item
+      *ngFor="let problem of problems"
+      button
+      (click)="viewProblem(problem)"
+    >
+      <ion-label>
+        <h2>{{ problem.userId }}</h2>
+        <h3>{{ problem.title }}</h3>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

@@ -1,0 +1,45 @@
+.problems-page {
+  --ion-background-color: #f4f4f4;
+
+  .title-container {
+    text-align: center;
+    margin: 20px 0;
+
+    h1 {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #444;
+    }
+  }
+
+  ion-item {
+    --background: #ffffff;
+    margin: 10px 0;
+    border-radius: 8px;
+    --border-color: #ddd;
+    --border-width: 1px;
+
+    ion-label {
+      display: flex;
+      flex-direction: column;
+
+      h2 {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #333;
+      }
+
+      h3 {
+        font-size: 1rem;
+        color: #666;
+      }
+    }
+  }
+
+  .note {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #333;
+  }
+}
