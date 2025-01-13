@@ -44,8 +44,7 @@ export class IncomePage implements OnInit {
   }
 
   chooseCategory() {
-    console.log('Elegir categoría');
-    // Redirigir a una página o mostrar un modal/popover para elegir la categoría
+    this.router.navigate(['/economic']);
   }
 
   goToHelp() {

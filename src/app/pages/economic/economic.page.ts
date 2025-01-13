@@ -63,7 +63,7 @@ export class EconomicPage implements OnInit {
   }
 
   goToExpenses() {
-    this.router.navigate(['/expenses']);
+    this.router.navigate(['/expense']);
   }
 
   goToSavings() {
