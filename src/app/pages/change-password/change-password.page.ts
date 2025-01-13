@@ -1,64 +1,78 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.page.html',
   styleUrls: ['./change-password.page.scss'],
-  standalone: false
+  standalone: false,
 })
-
 export class ChangePasswordPage implements OnInit {
-  currentPassword: string = '';
-  newPassword: string = '';
-  confirmPassword: string = '';
-
-  // Controladores de tipo de campo (password/eye)
+  passwordForm: FormGroup;
   currentPasswordType: string = 'password';
   newPasswordType: string = 'password';
   confirmPasswordType: string = 'password';
 
-  constructor(private alertController: AlertController, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private alertController: AlertController,
+    private router: Router
+  ) {
+    this.passwordForm = this.fb.group(
+      {
+        currentPassword: ['', Validators.required],
+        newPassword: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(8),
+            Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$'),
+          ],
+        ],
+        confirmPassword: ['', Validators.required],
+      },
+      {
+        validators: this.passwordsMatchValidator,
+      }
+    );
+  }
 
   ngOnInit() {}
 
-  // Alternar visibilidad de contraseña actual
   toggleCurrentPasswordType() {
-    this.currentPasswordType = this.currentPasswordType === 'password' ? 'text' : 'password';
+    this.currentPasswordType =
+      this.currentPasswordType === 'password' ? 'text' : 'password';
   }
 
-  // Alternar visibilidad de nueva contraseña
   toggleNewPasswordType() {
-    this.newPasswordType = this.newPasswordType === 'password' ? 'text' : 'password';
+    this.newPasswordType =
+      this.newPasswordType === 'password' ? 'text' : 'password';
   }
 
-  // Alternar visibilidad de confirmar contraseña
   toggleConfirmPasswordType() {
-    this.confirmPasswordType = this.confirmPasswordType === 'password' ? 'text' : 'password';
+    this.confirmPasswordType =
+      this.confirmPasswordType === 'password' ? 'text' : 'password';
   }
 
-  // Validar y enviar formulario
   async onSubmit() {
-    if (this.newPassword !== this.confirmPassword) {
+    if (this.passwordForm.valid) {
+      console.log('Contraseña cambiada:', this.passwordForm.value.newPassword);
       const alert = await this.alertController.create({
-        header: 'Error',
-        message: 'Las contraseñas no coinciden.',
+        header: 'Éxito',
+        message: 'Tu contraseña ha sido cambiada correctamente.',
         buttons: ['OK'],
       });
       await alert.present();
-      return;
+      this.passwordForm.reset();
     }
+  }
 
-    // Aquí iría la lógica para cambiar la contraseña con un servicio
-    console.log('Contraseña cambiada:', this.newPassword);
-
-    const alert = await this.alertController.create({
-      header: 'Éxito',
-      message: 'Tu contraseña ha sido cambiada correctamente.',
-      buttons: ['OK'],
-    });
-    await alert.present();
+  passwordsMatchValidator(group: FormGroup): { [key: string]: boolean } | null {
+    const newPassword = group.get('newPassword')?.value;
+    const confirmPassword = group.get('confirmPassword')?.value;
+    return newPassword === confirmPassword ? null : { passwordsMismatch: true };
   }
 
   goToHelp() {
