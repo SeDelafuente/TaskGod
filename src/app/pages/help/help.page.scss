@@ -1,0 +1,40 @@
+.help-page {
+  --ion-background-color: #f4f4f4;
+
+  .title-container {
+    text-align: center;
+    margin: 20px 0;
+
+    h1 {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #444;
+    }
+  }
+
+  ion-item {
+    --background: #ffffff;
+    border-radius: 8px;
+    margin: 10px 0;
+    padding: 5px;
+
+    ion-input,
+    ion-textarea {
+      font-size: 1rem;
+      color: #444;
+    }
+
+    ion-datetime {
+      font-size: 1rem;
+      color: #444;
+    }
+  }
+
+  .submit-button {
+    --background: #00c8d7;
+    --color: white;
+    margin-top: 20px;
+    border-radius: 8px;
+    font-weight: bold;
+  }
+}

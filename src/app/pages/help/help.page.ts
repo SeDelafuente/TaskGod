@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-help',
@@ -6,11 +7,43 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./help.page.scss'],
   standalone: false
 })
-export class HelpPage implements OnInit {
+export class HelpPage {
+  form = {
+    problemSummary: '',
+    problemDetails: '',
+    incidentDate: '',
+    affectedPages: '',
+  };
 
-  constructor() { }
+  constructor(private router: Router) {}
 
-  ngOnInit() {
+  goToLogin() {
+    this.router.navigate(['/login']);
   }
 
+  submitForm() {
+    if (this.isFormValid()) {
+      console.log('Formulario enviado:', this.form);
+      alert('Formulario enviado correctamente');
+      this.resetForm();
+    } else {
+      alert('Por favor, completa todos los campos requeridos.');
+    }
+  }
+
+  isFormValid() {
+    return (
+      this.form.problemSummary.trim() !== '' &&
+      this.form.problemDetails.trim() !== ''
+    );
+  }
+
+  resetForm() {
+    this.form = {
+      problemSummary: '',
+      problemDetails: '',
+      incidentDate: '',
+      affectedPages: '',
+    };
+  }
 }
