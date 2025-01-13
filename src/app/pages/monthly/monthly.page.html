@@ -1,13 +1,66 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>monthly</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="help-circle-outline"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">monthly</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="monthly-page">
+  <!-- Título -->
+  <div class="title-container">
+    <h1>TAREAS DEL MES</h1>
+    <h2>{{ currentMonth }}</h2>
+  </div>
+
+  <!-- Lista de tareas -->
+  <div class="tasks-container">
+    <ion-list>
+      <ion-item *ngFor="let task of tasks">
+        <ion-checkbox slot="start" [(ngModel)]="task.completed"></ion-checkbox>
+        <ion-label>{{ task.description }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <!-- Botón para editar lista -->
+  <ion-button expand="block" class="edit-button" (click)="openModal()">Editar lista</ion-button>
 </ion-content>
+
+<!-- Modal para CRUD -->
+<ion-modal [isOpen]="isModalOpen" (didDismiss)="closeModal()">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Editar lista</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="closeModal()">Cerrar</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-list>
+        <ion-item *ngFor="let task of tasks; let i = index">
+          <ion-input [(ngModel)]="task.description" placeholder="Editar tarea"></ion-input>
+          <ion-button color="danger" slot="end" (click)="deleteTask(i)">
+            <ion-icon name="trash"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+
+      <ion-item>
+        <ion-input [(ngModel)]="newTask" placeholder="Nueva tarea"></ion-input>
+        <ion-button (click)="addTask()">Agregar</ion-button>
+      </ion-item>
+    </ion-content>
+  </ng-template>
+</ion-modal>
