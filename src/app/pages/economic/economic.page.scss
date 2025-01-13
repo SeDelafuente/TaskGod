@@ -1,0 +1,88 @@
+.economic-page {
+  --ion-background-color: #d9d9d9;
+
+  .title-container {
+    text-align: center;
+    margin-top: 20px;
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #00a000;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      color: #444;
+    }
+  }
+
+  .savings-section {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+
+    .goal-container,
+    .saved-container {
+      text-align: center;
+
+      p {
+        font-size: 1.2rem;
+        color: #444;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #00a000;
+      }
+
+      ion-icon {
+        font-size: 1.5rem;
+        color: #00a000;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .buttons-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 20px;
+
+    ion-button {
+      font-weight: bold;
+      --border-radius: 10px;
+      height: 50px;
+    }
+
+    .income-button {
+      --background: #00a000;
+      --color: white;
+    }
+
+    .expenses-button {
+      --background: #ff0000;
+      --color: white;
+    }
+
+    .savings-button {
+      --background: #00bfff;
+      --color: white;
+    }
+
+    .withdraw-button {
+      --background: #ffa500;
+      --color: white;
+    }
+  }
+
+  .history-button {
+    --background: #00a000;
+    --color: white;
+    margin-top: 20px;
+    font-weight: bold;
+  }
+}
