@@ -51,8 +51,7 @@
   --background-activated: #00a4ac;
   --color: #fff;
   border-radius: 40px;
-  width: 40px;
-  height: 40px;
+
   padding: 0;
   display: flex;
   justify-content: center;
@@ -102,4 +101,8 @@ ion-item {
   margin: auto;
   height: 100%;
   padding: 0;
+}
+
+.refresh-icon{
+  font-size: 25px !important;
 }
