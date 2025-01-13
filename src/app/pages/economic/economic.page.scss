@@ -46,6 +46,49 @@
     }
   }
 
+  .chart-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+
+    .circle-chart {
+      --size: 200px;
+      --border: 20px;
+      --percent: 0;
+      --bg-color: #efefef;
+      --accent-color: #00a000;
+      --font-size: 24px;
+      position: relative;
+      width: var(--size);
+      height: var(--size);
+      box-shadow: inset 0 0 0 var(--border) var(--bg-color);
+      border-radius: 50%;
+      font-weight: bold;
+      font-size: var(--font-size);
+      color: var(--accent-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .circle-chart::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      border-radius: 50%;
+      background: conic-gradient(
+        var(--accent-color) calc(var(--percent) * 1%),
+        transparent 0
+      );
+      mask: radial-gradient(
+        farthest-side,
+        transparent calc(99% - var(--border)),
+        #000000 calc(100% - var(--border))
+      );
+    }
+  }
+
   .buttons-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -86,3 +129,4 @@
     font-weight: bold;
   }
 }
+

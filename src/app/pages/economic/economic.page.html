@@ -27,13 +27,18 @@
     <div class="goal-container">
       <p>META DE AHORRO:</p>
       <h2>{{ savingsGoal }} CLP</h2>
-      <ion-icon name="refresh-circle" (click)="editSavingsGoal()"></ion-icon>
+      <ion-icon name="refresh-circle" (click)="presentPopover('goal')"></ion-icon>
     </div>
     <div class="saved-container">
       <p>AHORRADO:</p>
       <h2>{{ currentSavings }} CLP</h2>
-      <ion-icon name="refresh-circle" (click)="updateSavings()"></ion-icon>
+      <ion-icon name="refresh-circle" (click)="presentPopover('savings')"></ion-icon>
     </div>
+  </div>
+
+  <!-- Gráfico circular -->
+  <div class="chart-container">
+    <div id="circle-chart" class="circle-chart animate"></div>
   </div>
 
   <!-- Botones -->

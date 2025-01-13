@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { EconomicPageRoutingModule } from './economic-routing.module';
 import { EconomicPage } from './economic.page';
+import { PopoverComponent } from '../../components/popover/popover.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -11,6 +13,6 @@ import { EconomicPage } from './economic.page';
     IonicModule,
     EconomicPageRoutingModule,
   ],
-  declarations: [EconomicPage]
+  declarations: [EconomicPage, PopoverComponent]
 })
 export class EconomicPageModule {}

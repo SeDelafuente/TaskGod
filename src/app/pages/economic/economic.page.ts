@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PopoverController } from '@ionic/angular';
+import { PopoverComponent } from '../../components/popover/popover.component';
 
 @Component({
   selector: 'app-economic',
@@ -11,13 +13,49 @@ export class EconomicPage implements OnInit {
   savingsGoal: number = 500000; // Meta de ahorro inicial
   currentSavings: number = 200000; // Cantidad ahorrada inicial
   currentMonth: string = '';
+  progressPercentage: number = 0;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private popoverController: PopoverController) {}
 
   ngOnInit() {
     this.currentMonth = new Date().toLocaleDateString('es-CL', {
       month: 'long',
+      year: 'numeric',
     });
+    this.updateChart();
+  }
+
+  updateChart() {
+    this.progressPercentage = Math.min(
+      Math.max((this.currentSavings / this.savingsGoal) * 100, 0),
+      100
+    );
+    const chartElement = document.getElementById('circle-chart');
+    if (chartElement) {
+      chartElement.style.setProperty('--percent', this.progressPercentage.toString());
+      chartElement.textContent = `${Math.round(this.progressPercentage)}%`;
+    }
+  }
+
+  async presentPopover(type: 'goal' | 'savings') {
+    const popover = await this.popoverController.create({
+      component: PopoverComponent,
+      translucent: true,
+      componentProps: {
+        title: type === 'goal' ? 'Editar Meta de Ahorro' : 'Editar Cantidad Ahorrada',
+        value: type === 'goal' ? this.savingsGoal : this.currentSavings,
+        onSave: (newValue: number) => {
+          if (type === 'goal') {
+            this.savingsGoal = newValue;
+          } else {
+            this.currentSavings = newValue;
+          }
+          this.updateChart();
+          popover.dismiss();
+        },
+      },
+    });
+    await popover.present();
   }
 
   goToIncome() {
@@ -46,13 +84,5 @@ export class EconomicPage implements OnInit {
 
   goToLogin() {
     this.router.navigate(['/login']);
-  }
-
-  editSavingsGoal() {
-    console.log('Editar meta de ahorro');
-  }
-
-  updateSavings() {
-    console.log('Actualizar cantidad ahorrada');
   }
 }
