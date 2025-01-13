@@ -104,6 +104,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/help/help.module').then( m => m.HelpPageModule)
   },
   {
+    path: 'history',
+    loadChildren: () => import('./pages/history/history.module').then( m => m.HistoryPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/error404/error404.module').then( m => m.Error404PageModule)
   },

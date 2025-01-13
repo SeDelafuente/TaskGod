@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <!-- Botón de regreso (Back) -->
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <!-- Botón de ayuda centrado -->
+    <ion-buttons>
+      <ion-button class="help-button" (click)="goToHelp()">
+        <ion-icon name="help-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <!-- Botón de cerrar sesión a la derecha -->
+    <ion-buttons slot="end">
+      <ion-button (click)="goToLogin()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="history-page">
+  <div class="title-container">
+    <h1>HISTORIAL ECONÓMICO</h1>
+  </div>
+  <ion-list>
+    <ion-item *ngFor="let month of monthlyHistory">
+      <div class="month-container">
+        <p>{{ month.name }} {{ month.year }}</p>
+      </div>
+      <div class="details-container">
+        <p class="income">INGRESO: {{ month.income }} CLP</p>
+        <p class="expense">GASTO: {{ month.expense }} CLP</p>
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

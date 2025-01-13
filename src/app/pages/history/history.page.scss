@@ -1,0 +1,68 @@
+.history-page {
+  --ion-background-color: #d9d9d9;
+
+  .title-container {
+    text-align: center;
+    margin: 20px 0;
+
+    h1 {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #00a000;
+    }
+  }
+
+  ion-list {
+    margin: 10px;
+
+    ion-item {
+      --background: #d9ffd9;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      padding: 10px;
+
+      .month-container {
+        background-color: #ccffcc;
+        padding: 10px;
+        border-radius: 8px;
+        flex: 1;
+
+        p {
+          font-size: 1.2rem;
+          font-weight: bold;
+          color: #444;
+        }
+      }
+
+      .details-container {
+        flex: 2;
+        text-align: right;
+
+        p {
+          margin: 5px 0;
+
+          &.income {
+            color: #00a000;
+            font-weight: bold;
+          }
+
+          &.expense {
+            color: #ff0000;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+}
+
+.help-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  height: 100%;
+  padding: 0;
+}
+
+
