@@ -16,41 +16,63 @@
     <h1>¿NECESITAS AYUDA?</h1>
   </div>
 
-  <form (ngSubmit)="submitForm()">
+  <form [formGroup]="helpForm" (ngSubmit)="submitForm()">
+    <!-- Resumen del problema -->
     <ion-item>
       <ion-input
         type="text"
         placeholder="Tu problema en 3 palabras"
-        [(ngModel)]="form.problemSummary"
-        name="problemSummary"
-        required
+        formControlName="problemSummary"
       ></ion-input>
     </ion-item>
+    <ion-text
+      color="danger"
+      *ngIf="helpForm.get('problemSummary')?.touched && helpForm.get('problemSummary')?.errors?.['required']"
+    >
+      Resumen de problema es obligatorio.
+    </ion-text>
+    <ion-text
+      color="danger"
+      *ngIf="helpForm.get('problemSummary')?.touched && helpForm.get('problemSummary')?.errors?.['maxlength']"
+    >
+      Máximo 30 caracteres permitidos.
+    </ion-text>
 
+    <!-- Detalles del problema -->
     <ion-item>
       <ion-textarea
         placeholder="Explicación de tú problema"
-        [(ngModel)]="form.problemDetails"
-        name="problemDetails"
-        required
+        formControlName="problemDetails"
       ></ion-textarea>
     </ion-item>
+    <ion-text
+      color="danger"
+      *ngIf="helpForm.get('problemDetails')?.touched && helpForm.get('problemDetails')?.errors?.['required']"
+    >
+      Detalle del problema es obligatorio.
+    </ion-text>
 
+    <!-- Fecha y hora del incidente -->
     <ion-item>
       <ion-label>Fecha y hora del incidente</ion-label>
       <ion-datetime
         display-format="DD MMM YYYY HH:mm"
-        [(ngModel)]="form.incidentDate"
-        name="incidentDate"
+        formControlName="incidentDate"
       ></ion-datetime>
     </ion-item>
+    <ion-text
+      color="danger"
+      *ngIf="helpForm.get('incidentDate')?.touched && helpForm.get('incidentDate')?.errors?.['required']"
+    >
+      Fecha y hora del incidente son obligatorias.
+    </ion-text>
 
+    <!-- Páginas afectadas -->
     <ion-item>
       <ion-input
         type="text"
         placeholder="Páginas a las que afecto"
-        [(ngModel)]="form.affectedPages"
-        name="affectedPages"
+        formControlName="affectedPages"
       ></ion-input>
     </ion-item>
 
@@ -58,7 +80,7 @@
       expand="block"
       class="submit-button"
       type="submit"
-      [disabled]="!isFormValid()"
+      [disabled]="helpForm.invalid"
     >
       Enviar formulario
     </ion-button>
