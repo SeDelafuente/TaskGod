@@ -1,12 +1,18 @@
-import { Component } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-monthly',
   templateUrl: './monthly.page.html',
   styleUrls: ['./monthly.page.scss'],
   standalone: false
 })
-export class MonthlyPage {
+export class MonthlyPage implements OnInit  {
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
+
+  }
+
   tasks = [
     { description: 'Terminar mes con $100.000', completed: false },
     { description: 'Hacer ejercicio todas las semanas', completed: false },
@@ -36,5 +42,13 @@ export class MonthlyPage {
 
   deleteTask(index: number) {
     this.tasks.splice(index, 1);
+  }
+
+  goToHelp(){
+    this.router.navigate(['/help']);
+  }
+
+  goToLogin(){
+    this.router.navigate(['/login']);
   }
 }

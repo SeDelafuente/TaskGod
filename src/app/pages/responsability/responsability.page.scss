@@ -1,0 +1,54 @@
+.responsibility-page {
+  --ion-background-color: #d9d9d9;
+
+  .title-container {
+    text-align: center;
+    margin-top: 20px;
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #4a90e2;
+      text-transform: uppercase;
+    }
+  }
+
+  .task-section {
+    background-color: #d9d9d9;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #444;
+    }
+
+    ion-item {
+      --background: #ffffff;
+      margin-bottom: 10px;
+      border-radius: 10px;
+    }
+  }
+
+  .edit-button,
+  .articles-button {
+    --background: #4a90e2;
+    --background-hover: #3a80d2;
+    --background-activated: #2a70c2;
+    --color: #fff;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+}
+
+.help-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  height: 100%;
+  padding: 0;
+}

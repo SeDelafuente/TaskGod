@@ -1,12 +1,17 @@
-import { Component } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-diary',
   templateUrl: './diary.page.html',
   styleUrls: ['./diary.page.scss'],
   standalone: false,
 })
-export class DiaryPage {
+export class DiaryPage implements OnInit  {
+    constructor(private router: Router) {}
+
+    ngOnInit(): void {
+
+    }
   tasks = [
     { description: 'Poner en ahorro $2,500', completed: false },
     { description: 'Hacer rutina de cardio', completed: false },
@@ -34,6 +39,14 @@ export class DiaryPage {
 
   deleteTask(index: number) {
     this.tasks.splice(index, 1);
+  }
+
+  goToHelp(){
+    this.router.navigate(['/help']);
+  }
+
+  goToLogin(){
+    this.router.navigate(['/login']);
   }
 }
 
