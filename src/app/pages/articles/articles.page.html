@@ -1,13 +1,52 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>articles</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons>
+      <ion-button class="help-button" (click)="goToHelp()">
+        <ion-icon name="help-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToLogin()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">articles</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="articles-page">
+  <div class="title-container">
+    <h1>Artículos sobre {{ currentTopic }}</h1>
+  </div>
+
+  <ion-list>
+    <ion-item
+      *ngFor="let article of articles"
+      button
+      (click)="openArticle(article)"
+    >
+      <ion-label>
+        <h2>{{ article.title }}</h2>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- Modal -->
+  <div *ngIf="isModalOpen" class="modal">
+    <ion-header>
+      <ion-title>{{ selectedArticle?.title }}</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="closeModal()">
+          <ion-icon name="close-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-header>
+    <div class="modal-content">
+      <p>{{ selectedArticle?.content }}</p>
+    </div>
+  </div>
+
+
 </ion-content>
