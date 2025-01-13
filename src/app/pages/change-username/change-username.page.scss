@@ -2,7 +2,6 @@
   --ion-background-color: #d9d9d9;
   --ion-text-color: #000;
 }
-
 .change-username-page {
   display: flex;
   flex-direction: column;
@@ -10,34 +9,32 @@
   padding: 20px;
 }
 
-.title-container {
-  text-align: center;
-  margin-top: 20px;
-}
-
 .title-container h1 {
   font-size: 1.8rem;
   font-weight: bold;
+  text-align: center;
   color: #000;
 }
 
 .form-container {
+  background: #fff;
+  border-radius: 30px;
+  padding: 20px;
   width: 90%;
   max-width: 400px;
-  padding: 20px;
-  background-color: white;
-  border-radius: 30px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
   margin: auto;
 }
 
 ion-item {
   margin-bottom: 15px;
-  border-radius: 25px;
-  background-color: #f3f3f3;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+ion-text {
+  font-size: 0.9rem;
+  color: #ff3b30;
+  margin-top: -10px;
 }
 
 .submit-button {
@@ -60,4 +57,3 @@ ion-item {
   height: 100%;
   padding: 0;
 }
-

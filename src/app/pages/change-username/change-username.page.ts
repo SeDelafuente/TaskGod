@@ -1,47 +1,52 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-change-username',
   templateUrl: './change-username.page.html',
   styleUrls: ['./change-username.page.scss'],
-  standalone: false
+  standalone: false,
 })
 export class ChangeUsernamePage implements OnInit {
+  currentUsername: string = '$USERNAME'; // Cambiar por el valor dinámico
+  usernameForm: FormGroup;
 
-  currentUsername: string = '$USERNAME'; // Se puede reemplazar con el valor dinámico actual
-  newUsername: string = '';
-
-  constructor(private alertController: AlertController, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private alertController: AlertController,
+    private router: Router
+  ) {
+    this.usernameForm = this.fb.group({
+      newUsername: [
+        '',
+        [Validators.required, Validators.maxLength(30)],
+      ],
+    });
+  }
 
   ngOnInit() {}
 
-  // Enviar el formulario
   async onSubmit() {
-    if (!this.newUsername) {
+    if (this.usernameForm.valid) {
+      const newUsername = this.usernameForm.value.newUsername;
+
+      console.log('Nuevo nombre de usuario:', newUsername);
+
       const alert = await this.alertController.create({
-        header: 'Error',
-        message: 'Por favor ingresa un nuevo nombre de usuario.',
+        header: 'Éxito',
+        message: 'Tu nombre de usuario ha sido actualizado.',
         buttons: ['OK'],
       });
       await alert.present();
-      return;
     }
-
-    // Lógica para actualizar el nombre de usuario en el backend
-    console.log('Nuevo nombre de usuario:', this.newUsername);
-
-    const alert = await this.alertController.create({
-      header: 'Éxito',
-      message: 'Tu nombre de usuario ha sido actualizado.',
-      buttons: ['OK'],
-    });
-    await alert.present();
   }
 
   goToLogin() {
     this.router.navigate(['/login']);
   }
+
   goToHelp() {
     this.router.navigate(['/help']);
   }
