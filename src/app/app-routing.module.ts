@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { authGuard } from './guards/auth.guard';
+import { roleGuard } from './guards/role.guard';
 
 const routes: Routes = [
   {
@@ -47,7 +48,7 @@ const routes: Routes = [
   {
     path: 'homepage-admin',
     loadChildren: () => import('./pages/homepage-admin/homepage-admin.module').then( m => m.HomepageAdminPageModule),
-    canActivate: [authGuard]
+    canActivate: [authGuard, roleGuard]
   },
   {
     path: 'diary',
