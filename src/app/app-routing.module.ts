@@ -97,7 +97,7 @@ const routes: Routes = [
   },
   {
     path: 'withdraw',
-    loadChildren: () => import('./pages/User/withdraw/withdraw.module').then( m => m.WithdrawPageModule),
+    loadChildren: () => import('./pages/Tasks/finance/withdraw/withdraw.module').then( m => m.WithdrawPageModule),
     canActivate: [authGuard]
   },
   {
