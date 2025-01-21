@@ -1,11 +1,11 @@
 export const environment = {
-  production: true,
-  firebaseConfig: {
-    apiKey: "AIzaSyCs3VpxHUMGqYDYk_qfKNyx9H68eCNIn78",
-    authDomain: "quecomo-app.firebaseapp.com",
-    projectId: "quecomo-app",
-    storageBucket: "quecomo-app.firebasestorage.app",
-    messagingSenderId: "969625165001",
-    appId: "1:969625165001:web:7d6142f9afcc868f50c118"
-  },
+  production: false,
+   firebaseConfig : {
+    apiKey: "AIzaSyCQVVni4DZdHOWW-socAwftBJ0SLCpLp7A",
+    authDomain: "taskgodapp.firebaseapp.com",
+    projectId: "taskgodapp",
+    storageBucket: "taskgodapp.firebasestorage.app",
+    messagingSenderId: "799989735130",
+    appId: "1:799989735130:web:5019ac1e731e83e66a4fe3"
+  }
 };

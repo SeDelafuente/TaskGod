@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { EconomicPageRoutingModule } from './economic-routing.module';
 import { EconomicPage } from './economic.page';
-import { PopoverComponent } from '../../components/popover/popover.component';
+import { PopoverComponent } from '../../../../components/popover/popover.component'
 
 @NgModule({
   imports: [

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
-import { PopoverComponent } from '../../components/popover/popover.component';
+import { PopoverComponent } from '../../../../components/popover/popover.component'
 
 @Component({
   selector: 'app-economic',

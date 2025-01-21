@@ -2,18 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
-  standalone: false
+  standalone: false,
 })
 export class RegisterPage implements OnInit {
   registerForm!: FormGroup;
   passwordType: string = 'password'; // Por defecto oculta la contraseña
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+    private alertController: AlertController
+  ) {}
 
   ngOnInit() {
     this.registerForm = this.fb.group({
@@ -46,9 +52,27 @@ export class RegisterPage implements OnInit {
       this.passwordType === 'password' ? 'text' : 'password';
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.registerForm.valid) {
-      console.log(this.registerForm.value);
+      const userData = this.registerForm.value;
+
+      try {
+        await this.authService.register(userData);
+        await this.showAlert('Éxito', 'Tu cuenta ha sido creada con éxito.');
+        this.router.navigate(['/login']); // Redirigir al login
+      } catch (error) {
+        console.error('Error al registrar usuario:', error);
+        await this.showAlert('Error', 'No se pudo crear tu cuenta. Intenta nuevamente.');
+      }
     }
+  }
+
+  private async showAlert(header: string, message: string) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['OK'],
+    });
+    await alert.present();
   }
 }
