@@ -28,8 +28,8 @@ export class HomepageUserPage implements OnInit {
         this.userService.getUser(uid).subscribe((userData) => {
           if (userData) {
             this.username = userData.name || 'Usuario';
-            this.profilePicture = userData.profilePhoto?.trim()
-              ? userData.profilePhoto
+            this.profilePicture = userData.profilePicture?.trim()
+              ? userData.profilePicture
               : '../../../assets/img/profile-placeholder.png';
           }
         });

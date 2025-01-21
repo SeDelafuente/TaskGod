@@ -20,6 +20,14 @@ export class UserService {
     return this.firestore.collection('users').doc(uid).update(data);
   }
 
+  updateUsername(uid: string, username: string) : Promise<any>{
+    return this.firestore.collection('users').doc(uid).update({ username });
+  }
+
+  updatePassword(uid: string, password: string) : Promise<any>{
+    return this.firestore.collection('users').doc(uid).update({ password });
+  }
+
   // Subir foto de perfil
   updateProfilePicture(uid: string, profilePicture: string) : Promise<any>{
     return this.firestore.collection('users').doc(uid).update({ profilePicture });
