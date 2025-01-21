@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,11 @@ export class LoginPage implements OnInit {
   password: string = '';
   passwordType: string = 'password'; // Por defecto oculta la contraseña
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private userService: UserService
+  ) { }
 
   ngOnInit() { }
 
@@ -22,31 +28,52 @@ export class LoginPage implements OnInit {
     this.passwordType = this.passwordType === 'password' ? 'text' : 'password';
   }
 
-  // Simula un inicio de sesión usando localStorage
-  onSubmit() {
-    // const registeredUsers = JSON.parse(localStorage.getItem('users') || '[]');
+  // Inicia sesión con Firebase
+  async onSubmit() {
+    if (!this.email || !this.password) {
+      alert('Por favor, completa todos los campos.');
+      return;
+    }
 
-    // const userFound = registeredUsers.find((user: any) => user.email === this.email && user.password === this.password);
+    try {
+      // Llama al servicio de autenticación para iniciar sesión
+      const cred = await this.authService.login(this.email, this.password);
+      console.log('Inicio de sesión exitoso:', cred);
 
-    // if (userFound) {
-    //   console.log('Inicio de sesión exitoso');
-    //   alert('Inicio de sesión exitoso');
-    //   this.router.navigate(['/home']); // Redirecciona a la página de inicio
-    // } else {
-    //   console.log('Credenciales incorrectas');
-    //   alert('Correo o contraseña incorrectos');
-    // }
-  }
+      // Obtén datos del usuario desde Firestore
+      const userData = await this.userService.getUser(cred.user?.uid || '').toPromise();
+      console.log('Datos del usuario:', userData);
+
+      // Redirige a la página de inicio para usuarios
+      this.router.navigate(['/homepage-user']);
+    } catch (error : unknown) {
+      console.error('Error durante el inicio de sesión:', error);
+
+      if (error instanceof Error) {
+        console.error('Error durante el inicio de sesión:', error.message);
+        const firebaseError = error as any;
+        if (firebaseError.code === 'auth/user-not-found') {
+          alert('No existe un usuario con este correo.');
+        } else if (firebaseError.code === 'auth/wrong-password') {
+          alert('Contraseña incorrecta.');
+        } else {
+          alert('Ocurrió un error al iniciar sesión.');
+        }
+      } else {
+        console.error('Error desconocido:', error);
+        alert('Ocurrió un error inesperado.');
+    }
+  }}
 
   goToRegister() {
     this.router.navigate(['/register']);
-}
+  }
 
-  goToForget(){
-    this.router.navigate(['/forget-password'])
+  goToForget() {
+    this.router.navigate(['/forget-password']);
   }
 
   goToUserHome() {
     this.router.navigate(['/homepage-user']);
-}
+  }
 }
