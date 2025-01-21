@@ -101,11 +101,6 @@ const routes: Routes = [
     canActivate: [authGuard]
   },
   {
-    path: 'record',
-    loadChildren: () => import('./pages/Tasks/finance/record/record.module').then( m => m.RecordPageModule),
-    canActivate: [authGuard]
-  },
-  {
     path: 'articles',
     loadChildren: () => import('./pages/User/articles/articles.module').then( m => m.ArticlesPageModule),
     canActivate: [authGuard]
