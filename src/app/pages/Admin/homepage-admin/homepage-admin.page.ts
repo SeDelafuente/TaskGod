@@ -1,17 +1,47 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
+import { UserService } from '../../../services/user.service';
+
 @Component({
   selector: 'app-homepage-admin',
   templateUrl: './homepage-admin.page.html',
   styleUrls: ['./homepage-admin.page.scss'],
-  standalone: false
+  standalone: false,
 })
 export class HomepageAdminPage implements OnInit {
-  username: string = '$ADMINISTRADOR';
+  username: string = 'ADMINISTRADOR';
+  profilePicture: string = '../../../assets/img/profile-placeholder.png'; // Imagen de perfil predeterminada
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private userService: UserService
+  ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    try {
+      // Obtener el UID del administrador
+      const uid = await this.authService.getUserId();
+      if (uid) {
+        // Obtener datos del administrador desde Firestore
+        this.userService.getUser(uid).subscribe((userData) => {
+          if (userData) {
+            this.username = userData.name || 'ADMINISTRADOR';
+            this.profilePicture = userData.profilePhoto?.trim()
+              ? userData.profilePhoto
+              : '../../../assets/img/profile-placeholder.png';
+          }
+        });
+      } else {
+        // Redirigir al login si no hay usuario autenticado
+        this.router.navigate(['/login']);
+      }
+    } catch (error) {
+      console.error('Error al cargar datos del administrador:', error);
+      alert('Ocurrió un problema al cargar la información del administrador.');
+      this.router.navigate(['/login']);
+    }
   }
 
   goToUsers() {
@@ -26,8 +56,14 @@ export class HomepageAdminPage implements OnInit {
     this.router.navigate(['/profile']);
   }
 
-  goToLogin() {
-    this.router.navigate(['/login']);
+  async goToLogin() {
+    try {
+      await this.authService.logout();
+      this.router.navigate(['/login']);
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error);
+      alert('No se pudo cerrar sesión. Por favor, inténtalo de nuevo.');
+    }
   }
 
   goToHelp() {

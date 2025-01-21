@@ -21,7 +21,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="homepage-user">
+<ion-content [fullscreen]="true" class="homepage-admin">
   <!-- Bienvenida -->
   <div class="title-container">
     <h1>BIENVENIDO<br><span>{{ username }}</span></h1>
@@ -29,12 +29,12 @@
 
   <!-- Imagen de perfil -->
   <div class="profile-container" (click)="goToProfile()">
-    <img src="../../../assets/img/profile-placeholder.png" alt="Perfil" class="profile-img">
+    <img [src]="profilePicture" alt="Perfil" class="profile-img">
   </div>
 
-  <!-- Tareas -->
+  <!-- Menú de control -->
   <div class="tasks-container">
-    <h2>Menú de control</h2>
+    <h2>MENÚ DE CONTROL</h2>
     <div class="tasks-buttons">
       <ion-button class="task-button" (click)="goToUsers()">Usuarios</ion-button>
       <ion-button class="task-button" (click)="goToProblems()">Problemas</ion-button>
