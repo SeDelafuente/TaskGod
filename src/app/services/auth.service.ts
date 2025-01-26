@@ -51,19 +51,10 @@ export class AuthService {
       });
   }
 
+
   // Recuperar contraseña
-  recoverPassword(email: string): Promise<void> {
-    return this.auth.sendPasswordResetEmail(email)
-      .then(() => {
-        console.log('Correo de restablecimiento enviado correctamente a:', email);
-      })
-      .catch((error) => {
-        console.error('Error al enviar el correo:', error.code, error.message);
-        if (error.code === 'auth/user-not-found') {
-          console.error('El usuario no existe en la base de datos.');
-        }
-        throw error;
-      });
+  recoverPassword(email: string) : Promise<void>{
+    return this.getAuth().sendPasswordResetEmail(email, {url: 'http://localhost:8100/validate-code', handleCodeInApp: true});
   }
 
   // Logout
