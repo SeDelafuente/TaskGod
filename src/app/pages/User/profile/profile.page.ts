@@ -28,6 +28,7 @@ export class ProfilePage implements OnInit {
     this.profileForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
+      username: ['', Validators.required],
       password: ['**********'],
     });
   }
@@ -49,6 +50,7 @@ export class ProfilePage implements OnInit {
             this.profileForm.patchValue({
               name: user.name,
               email: user.email,
+              username: user.username
             });
           }
         });
