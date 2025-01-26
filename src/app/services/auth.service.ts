@@ -55,7 +55,7 @@ export class AuthService {
 
   // Recuperar contraseña
   recoverPassword(email: string) : Promise<void>{
-    return this.getAuth().sendPasswordResetEmail(email, {url: 'http://localhost:8100/validate-code', handleCodeInApp: true});
+    return this.getAuth().sendPasswordResetEmail(email);
   }
 
   // Logout
