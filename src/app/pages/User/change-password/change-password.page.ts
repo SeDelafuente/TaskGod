@@ -71,39 +71,28 @@ export class ChangePasswordPage implements OnInit {
       const currentPassword = this.passwordForm.value.currentPassword.trim();
       const newPassword = this.passwordForm.value.newPassword.trim();
 
-      // Verificar contraseña actual
-      this.userService.getUser(this.uid).subscribe(async (user) => {
-        const storedPassword = user?.password?.trim();
-        if (storedPassword === currentPassword) {
-          // Contraseña correcta, actualizar la contraseña
-          try {
-            await this.userService.updatePassword(this.uid, newPassword);
-            const alert = await this.alertController.create({
-              header: 'Éxito',
-              message: 'Tu contraseña ha sido cambiada correctamente.',
-              buttons: ['OK'],
-            });
-            await alert.present();
-            this.passwordForm.reset();
-            this.router.navigate(['/profile']); // Redirigir al perfil
-          } catch (error) {
-            const alert = await this.alertController.create({
-              header: 'Error',
-              message: 'Hubo un problema al cambiar tu contraseña. Inténtalo de nuevo.',
-              buttons: ['OK'],
-            });
-            await alert.present();
-          }
-        } else {
-          // Contraseña actual incorrecta
-          const alert = await this.alertController.create({
-            header: 'Error',
-            message: 'La contraseña actual no es correcta.',
-            buttons: ['OK'],
-          });
-          await alert.present();
-        }
-      });
+      try {
+        await this.authService.updatePassword(currentPassword, newPassword);
+        const alert = await this.alertController.create({
+          header: 'Éxito',
+          message: 'Tu contraseña ha sido cambiada correctamente.',
+          buttons: ['OK'],
+        });
+        await alert.present();
+        this.passwordForm.reset();
+        this.router.navigate(['/profile']);
+      } catch (error) {
+        console.error({ error });
+        const alert = await this.alertController.create({
+          header: 'Error',
+          message:
+            'Hubo un problema al cambiar tu contraseña. Inténtalo de nuevo.',
+          buttons: ['OK'],
+        });
+        await alert.present();
+        this.passwordForm.reset();
+        this.router.navigate(['/profile']);
+      }
     }
   }
 
