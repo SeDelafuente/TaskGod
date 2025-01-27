@@ -41,7 +41,7 @@ export class ResponsabilityPage implements OnInit {
   // Cargar tareas mensuales de tipo 'monthly' y categoría 'Responsability'
   loadMonthlyTasks() {
     this.taskService
-      .getTasksByCategoryAndType('Responsabilidad', 'monthly')
+      .getTasksByCategoryAndType('Responsabilidad', 'Monthly')
       .subscribe((tasks) => {
         this.monthlyTasks = tasks;
       });

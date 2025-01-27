@@ -41,7 +41,7 @@ export class ExercisePage implements OnInit {
   // Cargar tareas mensuales de tipo 'monthly' y categoría 'Actividad fisica'
   loadMonthlyTasks() {
     this.taskService
-      .getTasksByCategoryAndType('Actividad fisica', 'monthly')
+      .getTasksByCategoryAndType('Actividad fisica', 'Monthly')
       .subscribe((tasks) => {
         this.monthlyTasks = tasks;
       });
@@ -96,7 +96,7 @@ export class ExercisePage implements OnInit {
       const uid = await this.authService.getUserId();
       const newTask: Partial<task> = {
         titulo: this.newMonthlyTask.trim(),
-        tipo: 'monthly',
+        tipo: 'Monthly',
         category: 'Actividad fisica',
         isCompleted: false,
         userId: uid,

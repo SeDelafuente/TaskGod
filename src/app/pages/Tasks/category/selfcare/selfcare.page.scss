@@ -43,6 +43,16 @@
     font-weight: bold;
     margin-top: 10px;
   }
+
+  ion-button {
+    --background: #ff66b2;
+    --background-hover: #e0559d;
+    --background-activated: #c9458a;
+    --background-focused: #c9458a;
+    --color: #fff;
+    font-weight: bold;
+    margin-top: 10px;
+  }
 }
 
 .help-button {
@@ -53,3 +63,4 @@
   height: 100%;
   padding: 0;
 }
+
