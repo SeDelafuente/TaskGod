@@ -15,7 +15,7 @@ export class TaskService {
   ) {}
 
   // Crea un task
-  createTask(newTask: task): Promise<void> {
+  createTask(newTask: Partial<task>): Promise<void> {
     const taskId = this.firestore.createId();
     return this.firestore
       .collection('tasks')

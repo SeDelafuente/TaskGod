@@ -35,7 +35,9 @@
         <ion-label>{{ task.description }}</ion-label>
       </ion-item>
     </ion-list>
-    <ion-button expand="block" class="edit-button" (click)="openDailyModal()">Editar lista</ion-button>
+    <ion-button expand="block" class="edit-button" (click)="openDailyModal()"
+      >Agregar tarea</ion-button
+    >
   </div>
 
   <!-- Tareas Mensuales -->
@@ -47,11 +49,15 @@
         <ion-label>{{ task.description }}</ion-label>
       </ion-item>
     </ion-list>
-    <ion-button expand="block" class="edit-button" (click)="openMonthlyModal()">Editar lista</ion-button>
+    <ion-button expand="block" class="edit-button" (click)="openMonthlyModal()"
+      >Agregar tarea</ion-button
+    >
   </div>
 
   <!-- Botón de Artículos -->
-  <ion-button expand="block" class="articles-button" (click)="goToArticles()">Artículos para mejorar productividad</ion-button>
+  <ion-button expand="block" class="articles-button" (click)="goToArticles()"
+    >Artículos para mejorar productividad</ion-button
+  >
 
   <!-- Modal para editar tareas diarias -->
   <ion-modal [isOpen]="isDailyModalOpen" (didDismiss)="closeDailyModal()">
@@ -68,7 +74,10 @@
       <ion-content>
         <ion-list>
           <ion-item *ngFor="let task of dailyTasks; let i = index">
-            <ion-input [(ngModel)]="task.description" placeholder="Editar tarea"></ion-input>
+            <ion-input
+              [(ngModel)]="task.description"
+              placeholder="Editar tarea"
+            ></ion-input>
             <ion-button color="danger" slot="end" (click)="deleteDailyTask(i)">
               <ion-icon name="trash"></ion-icon>
             </ion-button>
@@ -76,7 +85,10 @@
         </ion-list>
 
         <ion-item>
-          <ion-input [(ngModel)]="newDailyTask" placeholder="Nueva tarea"></ion-input>
+          <ion-input
+            [(ngModel)]="newDailyTask"
+            placeholder="Nueva tarea"
+          ></ion-input>
           <ion-button (click)="addDailyTask()">Agregar</ion-button>
         </ion-item>
       </ion-content>
@@ -98,15 +110,25 @@
       <ion-content>
         <ion-list>
           <ion-item *ngFor="let task of monthlyTasks; let i = index">
-            <ion-input [(ngModel)]="task.description" placeholder="Editar tarea"></ion-input>
-            <ion-button color="danger" slot="end" (click)="deleteMonthlyTask(i)">
+            <ion-input
+              [(ngModel)]="task.description"
+              placeholder="Editar tarea"
+            ></ion-input>
+            <ion-button
+              color="danger"
+              slot="end"
+              (click)="deleteMonthlyTask(i)"
+            >
               <ion-icon name="trash"></ion-icon>
             </ion-button>
           </ion-item>
         </ion-list>
 
         <ion-item>
-          <ion-input [(ngModel)]="newMonthlyTask" placeholder="Nueva tarea"></ion-input>
+          <ion-input
+            [(ngModel)]="newMonthlyTask"
+            placeholder="Nueva tarea"
+          ></ion-input>
           <ion-button (click)="addMonthlyTask()">Agregar</ion-button>
         </ion-item>
       </ion-content>
