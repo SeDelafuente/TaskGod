@@ -27,6 +27,7 @@
   <div class="tasks-container">
     <ion-list>
       <ion-item *ngFor="let task of tasks">
+<<<<<<< HEAD
         <ion-checkbox
           slot="start"
           [checked]="task.isCompleted"
@@ -36,16 +37,21 @@
           (ionChange)="toggleCompletion(task)"
 >>>>>>> 6a907e9 (Responsability / Diary / Monthly - TaskService implementation)
         ></ion-checkbox>
+=======
+>>>>>>> 083a4ab (Solucion error Responsability)
         <ion-label>
           <h2>{{ task.titulo }}</h2>
           <p>Categoría: {{ task.category }}</p>
         </ion-label>
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
         <ion-button color="danger" slot="end" (click)="deleteTask(task.userId)">
           <ion-icon name="trash"></ion-icon>
         </ion-button>
 >>>>>>> 6a907e9 (Responsability / Diary / Monthly - TaskService implementation)
+=======
+>>>>>>> 083a4ab (Solucion error Responsability)
       </ion-item>
     </ion-list>
   </div>

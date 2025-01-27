@@ -44,10 +44,14 @@ export class ResponsabilityPage implements OnInit {
   loadDailyTasks() {
     this.taskService
 <<<<<<< HEAD
+<<<<<<< HEAD
       .getTasksByCategoryAndType('Responsability', 'daily')
 =======
       .getTasksByCategoryAndType('Responsabilidades', 'daily')
 >>>>>>> 6a907e9 (Responsability / Diary / Monthly - TaskService implementation)
+=======
+      .getTasksByCategoryAndType('Responsability', 'daily')
+>>>>>>> 083a4ab (Solucion error Responsability)
       .subscribe((tasks) => {
         this.dailyTasks = tasks;
       });
@@ -57,10 +61,14 @@ export class ResponsabilityPage implements OnInit {
   loadMonthlyTasks() {
     this.taskService
 <<<<<<< HEAD
+<<<<<<< HEAD
       .getTasksByCategoryAndType('Responsability', 'monthly')
 =======
       .getTasksByCategoryAndType('Responsabilidades', 'monthly')
 >>>>>>> 6a907e9 (Responsability / Diary / Monthly - TaskService implementation)
+=======
+      .getTasksByCategoryAndType('Responsability', 'monthly')
+>>>>>>> 083a4ab (Solucion error Responsability)
       .subscribe((tasks) => {
         this.monthlyTasks = tasks;
       });
@@ -88,14 +96,19 @@ export class ResponsabilityPage implements OnInit {
 =======
   async addDailyTask() {
     if (this.newDailyTask.trim()) {
-      const userId = await this.authService.getUserId();
-      const newTask: Partial<task> = {
+      const uid = await this.authService.getUserId(); // Espera a obtener el ID del usuario
+      const newTask: task = {
+        id: '', // El ID será generado automáticamente en el backend
         titulo: this.newDailyTask.trim(),
         tipo: 'daily',
-        category: 'Responsabilidades',
+        category: 'Responsability',
         isCompleted: false,
+<<<<<<< HEAD
         userId,
 >>>>>>> 6a907e9 (Responsability / Diary / Monthly - TaskService implementation)
+=======
+        userId: uid,
+>>>>>>> 083a4ab (Solucion error Responsability)
       };
       this.taskService.createTask(newTask).then(() => {
         this.newDailyTask = '';
@@ -133,14 +146,19 @@ export class ResponsabilityPage implements OnInit {
 =======
   async addMonthlyTask() {
     if (this.newMonthlyTask.trim()) {
-      const userId = await this.authService.getUserId();
-      const newTask: Partial<task> = {
+      const uid = await this.authService.getUserId(); // Espera a obtener el ID del usuario
+      const newTask: task = {
+        id: '', // El ID será generado automáticamente en el backend
         titulo: this.newMonthlyTask.trim(),
         tipo: 'monthly',
-        category: 'Responsabilidades',
+        category: 'Responsability',
         isCompleted: false,
+<<<<<<< HEAD
         userId,
 >>>>>>> 6a907e9 (Responsability / Diary / Monthly - TaskService implementation)
+=======
+        userId: uid,
+>>>>>>> 083a4ab (Solucion error Responsability)
       };
       this.taskService.createTask(newTask).then(() => {
         this.newMonthlyTask = '';

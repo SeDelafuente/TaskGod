@@ -15,7 +15,7 @@ export class TaskService {
   ) {}
 
   // Crea un task
-  createTask(newTask: any): Promise<void> {
+  createTask(newTask: task): Promise<void> {
     const taskId = this.firestore.createId();
     return this.firestore
       .collection('tasks')
