@@ -1,0 +1,123 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-buttons>
+      <ion-button class="help-button" (click)="goToHelp()">
+        <ion-icon name="help-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="goToLogin()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="economic-page">
+  <div class="title-container">
+    <h1>ECONOMÍA</h1>
+  </div>
+
+  <!-- Tareas Diarias -->
+  <div class="task-section">
+    <h2>TUS TAREAS DIARIAS</h2>
+    <ion-list>
+      <ion-item *ngFor="let task of dailyTasks">
+        <ion-checkbox
+          slot="start"
+          [checked]="task.isCompleted"
+          (ionChange)="taskService.updateTask(task.uid, { isCompleted: !task.isCompleted })"
+        ></ion-checkbox>
+        <ion-label>{{ task.titulo }}</ion-label>
+        <ion-button
+          color="danger"
+          slot="end"
+          (click)="deleteDailyTask(task.uid)"
+        >
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-list>
+    <ion-button expand="block" (click)="openDailyModal()"
+      >Agregar tarea</ion-button
+    >
+  </div>
+
+  <!-- Tareas Mensuales -->
+  <div class="task-section">
+    <h2>TUS TAREAS MENSUALES</h2>
+    <ion-list>
+      <ion-item *ngFor="let task of monthlyTasks">
+        <ion-checkbox
+          slot="start"
+          [checked]="task.isCompleted"
+          (ionChange)="taskService.updateTask(task.uid, { isCompleted: !task.isCompleted })"
+        ></ion-checkbox>
+        <ion-label>{{ task.titulo }}</ion-label>
+        <ion-button
+          color="danger"
+          slot="end"
+          (click)="deleteMonthlyTask(task.uid)"
+        >
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-list>
+    <ion-button expand="block" (click)="openMonthlyModal()"
+      >Agregar tarea</ion-button
+    >
+  </div>
+
+  <!-- Modal para Tareas Diarias -->
+  <ion-modal [isOpen]="isDailyModalOpen" (didDismiss)="closeDailyModal()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Editar tareas diarias</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="closeDailyModal()">Cerrar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <ion-item>
+          <ion-input
+            [(ngModel)]="newDailyTask"
+            placeholder="Nueva tarea"
+          ></ion-input>
+          <ion-button (click)="addDailyTask()">Agregar</ion-button>
+        </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <!-- Modal para Tareas Mensuales -->
+  <ion-modal [isOpen]="isMonthlyModalOpen" (didDismiss)="closeMonthlyModal()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Editar tareas mensuales</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="closeMonthlyModal()">Cerrar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <ion-item>
+          <ion-input
+            [(ngModel)]="newMonthlyTask"
+            placeholder="Nueva tarea"
+          ></ion-input>
+          <ion-button (click)="addMonthlyTask()">Agregar</ion-button>
+        </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>
