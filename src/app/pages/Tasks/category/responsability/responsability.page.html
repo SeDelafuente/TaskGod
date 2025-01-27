@@ -1,4 +1,30 @@
+<<<<<<< HEAD
 <ion-content [fullscreen]="true" class="responsibility-page">
+=======
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <!-- Botón de regreso -->
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <!-- Botón de ayuda centrado -->
+    <ion-buttons>
+      <ion-button class="help-button" (click)="goToHelp()">
+        <ion-icon name="help-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="goToLogin()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="responsability-page">
+>>>>>>> 6a907e9 (Responsability / Diary / Monthly - TaskService implementation)
   <!-- Título -->
   <div class="title-container">
     <h1>RESPONSABILIDAD</h1>
@@ -25,7 +51,11 @@
       </ion-item>
     </ion-list>
     <ion-button expand="block" class="edit-button" (click)="openDailyModal()"
+<<<<<<< HEAD
       >Editar lista</ion-button
+=======
+      >Agregar tarea</ion-button
+>>>>>>> 6a907e9 (Responsability / Diary / Monthly - TaskService implementation)
     >
   </div>
 
@@ -50,7 +80,11 @@
       </ion-item>
     </ion-list>
     <ion-button expand="block" class="edit-button" (click)="openMonthlyModal()"
+<<<<<<< HEAD
       >Editar lista</ion-button
+=======
+      >Agregar tarea</ion-button
+>>>>>>> 6a907e9 (Responsability / Diary / Monthly - TaskService implementation)
     >
   </div>
 

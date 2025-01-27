@@ -1,11 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <!-- Botón de regreso -->
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
 
-    <!-- Botón de ayuda centrado -->
     <ion-buttons>
       <ion-button class="help-button" (click)="goToHelp()">
         <ion-icon name="help-circle-outline"></ion-icon>
@@ -21,25 +19,33 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="monthly-page">
-  <!-- Título -->
   <div class="title-container">
     <h1>TAREAS DEL MES</h1>
     <h2>{{ currentMonth }}</h2>
   </div>
 
-  <!-- Lista de tareas -->
   <div class="tasks-container">
     <ion-list>
       <ion-item *ngFor="let task of tasks">
         <ion-checkbox
           slot="start"
           [checked]="task.isCompleted"
+<<<<<<< HEAD
           disabled="true"
+=======
+          (ionChange)="toggleCompletion(task)"
+>>>>>>> 6a907e9 (Responsability / Diary / Monthly - TaskService implementation)
         ></ion-checkbox>
         <ion-label>
           <h2>{{ task.titulo }}</h2>
           <p>Categoría: {{ task.category }}</p>
         </ion-label>
+<<<<<<< HEAD
+=======
+        <ion-button color="danger" slot="end" (click)="deleteTask(task.userId)">
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
+>>>>>>> 6a907e9 (Responsability / Diary / Monthly - TaskService implementation)
       </ion-item>
     </ion-list>
   </div>

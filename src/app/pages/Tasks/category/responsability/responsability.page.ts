@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TaskService } from 'src/app/services/task.service';
 import { task } from 'src/app/models/task.model';
+<<<<<<< HEAD
+=======
+import { AuthService } from 'src/app/services/auth.service';
+>>>>>>> 6a907e9 (Responsability / Diary / Monthly - TaskService implementation)
 
 @Component({
   selector: 'app-responsibility',
@@ -9,7 +13,11 @@ import { task } from 'src/app/models/task.model';
   styleUrls: ['./responsability.page.scss'],
   standalone: false,
 })
+<<<<<<< HEAD
 export class ResponsibilityPage implements OnInit {
+=======
+export class ResponsabilityPage implements OnInit {
+>>>>>>> 6a907e9 (Responsability / Diary / Monthly - TaskService implementation)
   dailyTasks: task[] = [];
   monthlyTasks: task[] = [];
   newDailyTask: string = '';
@@ -17,7 +25,15 @@ export class ResponsibilityPage implements OnInit {
   isDailyModalOpen = false;
   isMonthlyModalOpen = false;
 
+<<<<<<< HEAD
   constructor(private router: Router, private taskService: TaskService) {}
+=======
+  constructor(
+    private router: Router,
+    public taskService: TaskService,
+    private authService: AuthService
+  ) {}
+>>>>>>> 6a907e9 (Responsability / Diary / Monthly - TaskService implementation)
 
   ngOnInit(): void {
     this.loadDailyTasks();
@@ -27,7 +43,11 @@ export class ResponsibilityPage implements OnInit {
   // Cargar tareas diarias de tipo 'daily' y categoría 'Responsability'
   loadDailyTasks() {
     this.taskService
+<<<<<<< HEAD
       .getTasksByCategoryAndType('Responsability', 'daily')
+=======
+      .getTasksByCategoryAndType('Responsabilidades', 'daily')
+>>>>>>> 6a907e9 (Responsability / Diary / Monthly - TaskService implementation)
       .subscribe((tasks) => {
         this.dailyTasks = tasks;
       });
@@ -36,7 +56,11 @@ export class ResponsibilityPage implements OnInit {
   // Cargar tareas mensuales de tipo 'monthly' y categoría 'Responsability'
   loadMonthlyTasks() {
     this.taskService
+<<<<<<< HEAD
       .getTasksByCategoryAndType('Responsability', 'monthly')
+=======
+      .getTasksByCategoryAndType('Responsabilidades', 'monthly')
+>>>>>>> 6a907e9 (Responsability / Diary / Monthly - TaskService implementation)
       .subscribe((tasks) => {
         this.monthlyTasks = tasks;
       });
@@ -52,6 +76,7 @@ export class ResponsibilityPage implements OnInit {
   }
 
   // Agregar tarea diaria
+<<<<<<< HEAD
   addDailyTask() {
     if (this.newDailyTask.trim()) {
       const newTask: task = {
@@ -60,6 +85,17 @@ export class ResponsibilityPage implements OnInit {
         category: 'Responsability',
         isCompleted: false,
         userId: '', // Se añade automáticamente en TaskService
+=======
+  async addDailyTask() {
+    if (this.newDailyTask.trim()) {
+      const userId = await this.authService.getUserId();
+      const newTask: Partial<task> = {
+        titulo: this.newDailyTask.trim(),
+        tipo: 'daily',
+        category: 'Responsabilidades',
+        isCompleted: false,
+        userId,
+>>>>>>> 6a907e9 (Responsability / Diary / Monthly - TaskService implementation)
       };
       this.taskService.createTask(newTask).then(() => {
         this.newDailyTask = '';
@@ -85,6 +121,7 @@ export class ResponsibilityPage implements OnInit {
   }
 
   // Agregar tarea mensual
+<<<<<<< HEAD
   addMonthlyTask() {
     if (this.newMonthlyTask.trim()) {
       const newTask: task = {
@@ -93,6 +130,17 @@ export class ResponsibilityPage implements OnInit {
         category: 'Responsability',
         isCompleted: false,
         userId: '', // Se añade automáticamente en TaskService
+=======
+  async addMonthlyTask() {
+    if (this.newMonthlyTask.trim()) {
+      const userId = await this.authService.getUserId();
+      const newTask: Partial<task> = {
+        titulo: this.newMonthlyTask.trim(),
+        tipo: 'monthly',
+        category: 'Responsabilidades',
+        isCompleted: false,
+        userId,
+>>>>>>> 6a907e9 (Responsability / Diary / Monthly - TaskService implementation)
       };
       this.taskService.createTask(newTask).then(() => {
         this.newMonthlyTask = '';

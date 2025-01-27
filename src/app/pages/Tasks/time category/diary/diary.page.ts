@@ -18,9 +18,15 @@ export class DiaryPage implements OnInit {
     this.loadTasks();
   }
 
+<<<<<<< HEAD
   // Cargar tareas de tipo "diary"
   loadTasks() {
     this.taskService.getTasksByType('diary').subscribe((tasks) => {
+=======
+  // Cargar tareas de tipo "daily"
+  loadTasks() {
+    this.taskService.getTasksByType('daily').subscribe((tasks) => {
+>>>>>>> 6a907e9 (Responsability / Diary / Monthly - TaskService implementation)
       this.tasks = tasks;
     });
   }
