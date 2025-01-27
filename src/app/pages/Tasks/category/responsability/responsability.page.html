@@ -24,7 +24,11 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="responsability-page">
+<<<<<<< Updated upstream
 >>>>>>> 6a907e9 (Responsability / Diary / Monthly - TaskService implementation)
+=======
+<ion-content [fullscreen]="true" class="responsibility-page">
+>>>>>>> Stashed changes
   <!-- Título -->
   <div class="title-container">
     <h1>RESPONSABILIDAD</h1>
@@ -48,6 +52,19 @@
         >
           <ion-icon name="trash"></ion-icon>
         </ion-button>
+        <ion-checkbox
+          slot="start"
+          [checked]="task.isCompleted"
+          (ionChange)="taskService.updateTask(task.id, { isCompleted: !task.isCompleted })"
+        ></ion-checkbox>
+        <ion-label>{{ task.titulo }}</ion-label>
+        <ion-button
+          color="danger"
+          slot="end"
+          (click)="deleteDailyTask(task.id)"
+        >
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
       </ion-item>
     </ion-list>
     <ion-button expand="block" class="edit-button" (click)="openDailyModal()"
@@ -57,6 +74,9 @@
       >Agregar tarea</ion-button
 >>>>>>> 6a907e9 (Responsability / Diary / Monthly - TaskService implementation)
     >
+    <ion-button expand="block" class="edit-button" (click)="openDailyModal()"
+      >Editar lista</ion-button
+    >
   </div>
 
   <!-- Tareas Mensuales -->
@@ -64,6 +84,19 @@
     <h2>TUS TAREAS MENSUALES</h2>
     <ion-list>
       <ion-item *ngFor="let task of monthlyTasks">
+        <ion-checkbox
+          slot="start"
+          [checked]="task.isCompleted"
+          (ionChange)="taskService.updateTask(task.id, { isCompleted: !task.isCompleted })"
+        ></ion-checkbox>
+        <ion-label>{{ task.titulo }}</ion-label>
+        <ion-button
+          color="danger"
+          slot="end"
+          (click)="deleteMonthlyTask(task.id)"
+        >
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
         <ion-checkbox
           slot="start"
           [checked]="task.isCompleted"
@@ -86,9 +119,15 @@
       >Agregar tarea</ion-button
 >>>>>>> 6a907e9 (Responsability / Diary / Monthly - TaskService implementation)
     >
+    <ion-button expand="block" class="edit-button" (click)="openMonthlyModal()"
+      >Editar lista</ion-button
+    >
   </div>
 
   <!-- Botón de Artículos -->
+  <ion-button expand="block" class="articles-button" (click)="goToArticles()"
+    >Artículos para mejorar productividad</ion-button
+  >
   <ion-button expand="block" class="articles-button" (click)="goToArticles()"
     >Artículos para mejorar productividad</ion-button
   >
@@ -112,8 +151,21 @@
               [(ngModel)]="task.titulo"
               placeholder="Editar tarea"
             ></ion-input>
+          <ion-item *ngFor="let task of dailyTasks">
+            <ion-input
+              [(ngModel)]="task.titulo"
+              placeholder="Editar tarea"
+            ></ion-input>
           </ion-item>
 
+          <ion-item>
+            <ion-input
+              [(ngModel)]="newDailyTask"
+              placeholder="Nueva tarea"
+            ></ion-input>
+            <ion-button (click)="addDailyTask()">Agregar</ion-button>
+          </ion-item>
+        </ion-list>
           <ion-item>
             <ion-input
               [(ngModel)]="newDailyTask"
@@ -145,8 +197,21 @@
               [(ngModel)]="task.titulo"
               placeholder="Editar tarea"
             ></ion-input>
+          <ion-item *ngFor="let task of monthlyTasks">
+            <ion-input
+              [(ngModel)]="task.titulo"
+              placeholder="Editar tarea"
+            ></ion-input>
           </ion-item>
 
+          <ion-item>
+            <ion-input
+              [(ngModel)]="newMonthlyTask"
+              placeholder="Nueva tarea"
+            ></ion-input>
+            <ion-button (click)="addMonthlyTask()">Agregar</ion-button>
+          </ion-item>
+        </ion-list>
           <ion-item>
             <ion-input
               [(ngModel)]="newMonthlyTask"

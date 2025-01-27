@@ -13,7 +13,6 @@ export class DiaryPage implements OnInit {
   tasks: task[] = [];
 
   constructor(private router: Router, private taskService: TaskService) {}
-
   ngOnInit(): void {
     this.loadTasks();
   }

@@ -15,6 +15,11 @@
         <ion-icon name="log-out-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToLogin()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -43,6 +48,7 @@
           <h2>{{ task.titulo }}</h2>
           <p>Categoría: {{ task.category }}</p>
         </ion-label>
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -52,6 +58,17 @@
 >>>>>>> 6a907e9 (Responsability / Diary / Monthly - TaskService implementation)
 =======
 >>>>>>> 083a4ab (Solucion error Responsability)
+=======
+        <ion-checkbox
+          slot="start"
+          [checked]="task.isCompleted"
+          disabled="true"
+        ></ion-checkbox>
+        <ion-label>
+          <h2>{{ task.titulo }}</h2>
+          <p>Categoría: {{ task.category }}</p>
+        </ion-label>
+>>>>>>> Stashed changes
       </ion-item>
     </ion-list>
   </div>
