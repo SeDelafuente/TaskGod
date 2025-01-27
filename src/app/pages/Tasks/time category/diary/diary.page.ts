@@ -1,52 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TaskService } from 'src/app/services/task.service';
+import { task } from 'src/app/models/task.model';
+
 @Component({
   selector: 'app-diary',
   templateUrl: './diary.page.html',
   styleUrls: ['./diary.page.scss'],
   standalone: false,
 })
-export class DiaryPage implements OnInit  {
-    constructor(private router: Router) {}
+export class DiaryPage implements OnInit {
+  tasks: task[] = [];
 
-    ngOnInit(): void {
+  constructor(private router: Router, private taskService: TaskService) {}
 
-    }
-  tasks = [
-    { description: 'Poner en ahorro $2,500', completed: false },
-    { description: 'Hacer rutina de cardio', completed: false },
-    { description: 'Entregar informe', completed: false },
-    { description: 'Meditar 15 min', completed: false },
-  ];
-
-  newTask: string = '';
-  isModalOpen = false;
-
-  openModal() {
-    this.isModalOpen = true;
+  ngOnInit(): void {
+    this.loadTasks();
   }
 
-  closeModal() {
-    this.isModalOpen = false;
+  // Cargar tareas de tipo "diary"
+  loadTasks() {
+    this.taskService.getTasksByType('diary').subscribe((tasks) => {
+      this.tasks = tasks;
+    });
   }
 
-  addTask() {
-    if (this.newTask.trim()) {
-      this.tasks.push({ description: this.newTask.trim(), completed: false });
-      this.newTask = '';
-    }
-  }
-
-  deleteTask(index: number) {
-    this.tasks.splice(index, 1);
-  }
-
-  goToHelp(){
+  goToHelp() {
     this.router.navigate(['/help']);
   }
 
-  goToLogin(){
+  goToLogin() {
     this.router.navigate(['/login']);
   }
 }
-
