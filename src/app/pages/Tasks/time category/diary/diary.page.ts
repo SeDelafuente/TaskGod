@@ -48,7 +48,7 @@ export class DiaryPage implements OnInit {
       const newTask: Partial<task> = {
         titulo: this.newTask.trim(),
         tipo: 'daily',
-        category: 'Diary', // Categoría de las tareas diarias
+        category: 'Diaria', // Categoría de las tareas diarias
         isCompleted: false,
         userId: uid,
       };

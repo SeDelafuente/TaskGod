@@ -1,54 +1,80 @@
 import { Component, OnInit } from '@angular/core';
+import { TaskService } from 'src/app/services/task.service';
+import { task } from 'src/app/models/task.model';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-monthly',
   templateUrl: './monthly.page.html',
   styleUrls: ['./monthly.page.scss'],
-  standalone: false
+  standalone: false,
 })
-export class MonthlyPage implements OnInit  {
-  constructor(private router: Router) {}
+export class MonthlyPage implements OnInit {
+  tasks: task[] = []; // Lista de tareas diarias desde Firebase
+  newTask: string = ''; // Nueva tarea a añadir
+  isModalOpen = false; // Estado del modal
+
+  constructor(
+    private router: Router,
+    public taskService: TaskService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
-
+    this.loadTasks(); // Cargar tareas al inicializar
   }
 
-  tasks = [
-    { description: 'Terminar mes con $100.000', completed: false },
-    { description: 'Hacer ejercicio todas las semanas', completed: false },
-    { description: 'Estar al día con informes', completed: false },
-    { description: 'Hacer rutina de skincare todas las semanas', completed: false },
-  ];
+  // Cargar tareas diarias desde Firebase
+  loadTasks() {
+    this.taskService.getTasksByType('Monthly').subscribe((tasks) => {
+      this.tasks = tasks;
+    });
+  }
 
-  newTask: string = '';
-  isModalOpen = false;
-
-  currentMonth: string = new Date().toLocaleString('es-ES', { month: 'long' });
-
+  // Abrir modal
   openModal() {
     this.isModalOpen = true;
   }
 
+  // Cerrar modal
   closeModal() {
     this.isModalOpen = false;
   }
 
-  addTask() {
+  // Agregar tarea diaria
+  async addTask() {
     if (this.newTask.trim()) {
-      this.tasks.push({ description: this.newTask.trim(), completed: false });
-      this.newTask = '';
+      const uid = await this.authService.getUserId(); // Obtener el ID del usuario
+      const newTask: Partial<task> = {
+        titulo: this.newTask.trim(),
+        tipo: 'Monthly',
+        category: 'Mensual', // Categoría de las tareas diarias
+        isCompleted: false,
+        userId: uid,
+      };
+
+      // Crear tarea en Firebase
+      this.taskService.createTask(newTask).then(() => {
+        this.newTask = ''; // Limpiar campo de nueva tarea
+        this.loadTasks(); // Recargar tareas
+      });
     }
   }
 
-  deleteTask(index: number) {
-    this.tasks.splice(index, 1);
+  // Eliminar tarea diaria
+  deleteTask(taskId: string) {
+    console.log('Delete task', { taskId });
+    this.taskService.deleteTask(taskId).then(() => {
+      this.loadTasks(); // Recargar tareas
+    });
   }
 
-  goToHelp(){
+  // Navegación
+  goToHelp() {
     this.router.navigate(['/help']);
   }
 
-  goToLogin(){
+  goToLogin() {
     this.router.navigate(['/login']);
   }
 }

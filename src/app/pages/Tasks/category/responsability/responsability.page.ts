@@ -32,7 +32,7 @@ export class ResponsabilityPage implements OnInit {
   // Cargar tareas diarias de tipo 'daily' y categoría 'Responsability'
   loadDailyTasks() {
     this.taskService
-      .getTasksByCategoryAndType('Responsability', 'daily')
+      .getTasksByCategoryAndType('Responsabilidad', 'daily')
       .subscribe((tasks) => {
         this.dailyTasks = tasks;
       });
@@ -41,7 +41,7 @@ export class ResponsabilityPage implements OnInit {
   // Cargar tareas mensuales de tipo 'monthly' y categoría 'Responsability'
   loadMonthlyTasks() {
     this.taskService
-      .getTasksByCategoryAndType('Responsability', 'monthly')
+      .getTasksByCategoryAndType('Responsabilidad', 'monthly')
       .subscribe((tasks) => {
         this.monthlyTasks = tasks;
       });
@@ -63,7 +63,7 @@ export class ResponsabilityPage implements OnInit {
       const newTask: Partial<task> = {
         titulo: this.newDailyTask.trim(),
         tipo: 'daily',
-        category: 'Responsability',
+        category: 'Responsabilidad',
         isCompleted: false,
         userId: uid,
       };
@@ -96,8 +96,8 @@ export class ResponsabilityPage implements OnInit {
       const uid = await this.authService.getUserId(); // Espera a obtener el ID del usuario
       const newTask: Partial<task> = {
         titulo: this.newMonthlyTask.trim(),
-        tipo: 'monthly',
-        category: 'Responsability',
+        tipo: 'Monthly',
+        category: 'Responsabilidad',
         isCompleted: false,
         userId: uid,
       };
