@@ -20,11 +20,12 @@ export class TaskService {
     return this.firestore
       .collection('tasks')
       .doc(taskId)
-      .set({ ...newTask, id: taskId });
+      .set({ ...newTask, uid: taskId });
   }
 
   // Actualiza un task
   updateTask(taskId: string, updatedFields: Partial<task>): Promise<void> {
+    console.log('Updating task', { taskId, updatedFields });
     return this.firestore.collection('tasks').doc(taskId).update(updatedFields);
   }
 

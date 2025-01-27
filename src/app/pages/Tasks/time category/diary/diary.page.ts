@@ -1,52 +1,80 @@
 import { Component, OnInit } from '@angular/core';
+import { TaskService } from 'src/app/services/task.service';
+import { task } from 'src/app/models/task.model';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-diary',
   templateUrl: './diary.page.html',
   styleUrls: ['./diary.page.scss'],
   standalone: false,
 })
-export class DiaryPage implements OnInit  {
-    constructor(private router: Router) {}
+export class DiaryPage implements OnInit {
+  tasks: task[] = []; // Lista de tareas diarias desde Firebase
+  newTask: string = ''; // Nueva tarea a añadir
+  isModalOpen = false; // Estado del modal
 
-    ngOnInit(): void {
+  constructor(
+    private router: Router,
+    public taskService: TaskService,
+    private authService: AuthService
+  ) {}
 
-    }
-  tasks = [
-    { description: 'Poner en ahorro $2,500', completed: false },
-    { description: 'Hacer rutina de cardio', completed: false },
-    { description: 'Entregar informe', completed: false },
-    { description: 'Meditar 15 min', completed: false },
-  ];
+  ngOnInit(): void {
+    this.loadTasks(); // Cargar tareas al inicializar
+  }
 
-  newTask: string = '';
-  isModalOpen = false;
+  // Cargar tareas diarias desde Firebase
+  loadTasks() {
+    this.taskService.getTasksByType('daily').subscribe((tasks) => {
+      this.tasks = tasks;
+    });
+  }
 
+  // Abrir modal
   openModal() {
     this.isModalOpen = true;
   }
 
+  // Cerrar modal
   closeModal() {
     this.isModalOpen = false;
   }
 
-  addTask() {
+  // Agregar tarea diaria
+  async addTask() {
     if (this.newTask.trim()) {
-      this.tasks.push({ description: this.newTask.trim(), completed: false });
-      this.newTask = '';
+      const uid = await this.authService.getUserId(); // Obtener el ID del usuario
+      const newTask: Partial<task> = {
+        titulo: this.newTask.trim(),
+        tipo: 'daily',
+        category: 'Diary', // Categoría de las tareas diarias
+        isCompleted: false,
+        userId: uid,
+      };
+
+      // Crear tarea en Firebase
+      this.taskService.createTask(newTask).then(() => {
+        this.newTask = ''; // Limpiar campo de nueva tarea
+        this.loadTasks(); // Recargar tareas
+      });
     }
   }
 
-  deleteTask(index: number) {
-    this.tasks.splice(index, 1);
+  // Eliminar tarea diaria
+  deleteTask(taskId: string) {
+    console.log('Delete task', { taskId });
+    this.taskService.deleteTask(taskId).then(() => {
+      this.loadTasks(); // Recargar tareas
+    });
   }
 
-  goToHelp(){
+  // Navegación
+  goToHelp() {
     this.router.navigate(['/help']);
   }
 
-  goToLogin(){
+  goToLogin() {
     this.router.navigate(['/login']);
   }
 }
-
