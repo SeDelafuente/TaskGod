@@ -14,7 +14,7 @@
   }
 
   .task-section {
-    background-color: #f4f4f4;
+    background-color:  #d9d9d9;
     margin: 20px;
     padding: 20px;
     border-radius: 10px;
@@ -26,25 +26,10 @@
       color: #444;
     }
 
-    ion-list {
-      margin: 0;
-      padding: 0;
-
-      ion-item {
-        --background: #ffffff;
-        margin-bottom: 10px;
-        border-radius: 10px;
-
-        ion-label {
-          font-size: 1rem;
-          color: #333;
-        }
-
-        ion-checkbox {
-          --background: #00bcd4;
-          --checkmark-color: #fff;
-        }
-      }
+    ion-item {
+      --background: #ffffff;
+      margin-bottom: 10px;
+      border-radius: 10px;
     }
   }
 
