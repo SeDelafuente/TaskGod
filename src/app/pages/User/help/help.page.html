@@ -12,10 +12,12 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="help-page">
+  <!-- Título -->
   <div class="title-container">
     <h1>¿NECESITAS AYUDA?</h1>
   </div>
 
+  <!-- Formulario -->
   <form [formGroup]="helpForm" (ngSubmit)="submitForm()">
     <!-- Resumen del problema -->
     <ion-item>
@@ -71,11 +73,12 @@
     <ion-item>
       <ion-input
         type="text"
-        placeholder="Páginas a las que afecto"
+        placeholder="Páginas a las que afectó"
         formControlName="affectedPages"
       ></ion-input>
     </ion-item>
 
+    <!-- Botón de envío -->
     <ion-button
       expand="block"
       class="submit-button"

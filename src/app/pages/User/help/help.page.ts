@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SupportService } from 'src/app/services/support.service';
+import { HelpForm } from 'src/app/models/helpForm.model';
 
 @Component({
   selector: 'app-help',
@@ -11,12 +13,13 @@ import { Router } from '@angular/router';
 export class HelpPage implements OnInit {
   helpForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private supportService: SupportService
+  ) {
     this.helpForm = this.fb.group({
-      problemSummary: [
-        '',
-        [Validators.required, Validators.maxLength(30)],
-      ],
+      problemSummary: ['', [Validators.required, Validators.maxLength(30)]],
       problemDetails: ['', Validators.required],
       incidentDate: ['', Validators.required],
       affectedPages: [''],
@@ -29,13 +32,21 @@ export class HelpPage implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  submitForm() {
+  async submitForm() {
     if (this.helpForm.valid) {
-      console.log('Formulario enviado:', this.helpForm.value);
-      alert('Formulario enviado correctamente');
-      this.helpForm.reset(); // Reinicia el formulario
-    } else {
-      alert('Por favor, completa todos los campos requeridos.');
+      const formData: HelpForm = {
+        ...this.helpForm.value,
+        status: 'pending',
+        createdAt: new Date(),
+      };
+
+      try {
+        await this.supportService.submitForm(formData);
+        console.log('Formulario enviado con éxito.');
+        this.helpForm.reset();
+      } catch (error) {
+        console.error('Error al enviar formulario:', error);
+      }
     }
   }
 }

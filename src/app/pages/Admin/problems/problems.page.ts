@@ -1,27 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SupportService } from 'src/app/services/support.service';
+import { HelpForm } from 'src/app/models/helpForm.model';
 
 @Component({
   selector: 'app-problems',
   templateUrl: './problems.page.html',
   styleUrls: ['./problems.page.scss'],
-  standalone: false
+  standalone: false,
 })
-export class ProblemsPage {
-  problems = [
-    { userId: 'User123', title: 'Problema ingreso datos' },
-    { userId: 'User456', title: 'Error en visualización' },
-    { userId: 'User789', title: 'No puedo acceder' },
-    { userId: 'User321', title: 'Problema carga archivos' },
-    { userId: 'User654', title: 'Solicitud de ayuda' },
-  ];
+export class ProblemsPage implements OnInit {
+  problems: HelpForm[] = []; // Lista para almacenar los problemas cargados
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private supportService: SupportService) {}
 
-  viewProblem(problem: any) {
-    alert(`Detalles del problema:\nUsuario: ${problem.userId}\nTítulo: ${problem.title}`);
+  ngOnInit() {
+    this.loadProblems(); // Cargar problemas al inicializar
   }
 
+  // Método para cargar problemas desde Firestore
+  loadProblems() {
+    this.supportService.getAllProblems().subscribe((data) => {
+      this.problems = data;
+    });
+  }
+
+  // Método para ver los detalles de un problema
+  viewProblem(problem: HelpForm) {
+    alert(
+      `Detalles del problema:\nUsuario: ${problem.userid}\nResumen: ${problem.problemSummary}\nDetalles: ${problem.problemDetails}`
+    );
+  }
+
+  // Método para navegar al login
   goToLogin() {
     this.router.navigate(['/login']);
   }

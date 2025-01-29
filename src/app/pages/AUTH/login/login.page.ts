@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { UserService } from '../../../services/user.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
-  standalone: false
+  standalone: false,
 })
 export class LoginPage implements OnInit {
-
   email: string = '';
   password: string = '';
   passwordType: string = 'password'; // Por defecto oculta la contraseña
@@ -19,9 +19,9 @@ export class LoginPage implements OnInit {
     private router: Router,
     private authService: AuthService,
     private userService: UserService
-  ) { }
+  ) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   // Alterna entre mostrar y ocultar la contraseña
   togglePasswordType() {
@@ -41,12 +41,20 @@ export class LoginPage implements OnInit {
       console.log('Inicio de sesión exitoso:', cred);
 
       // Obtén datos del usuario desde Firestore
-      const userData = await this.userService.getUser(cred.user?.uid || '').toPromise();
+      const userData = await firstValueFrom(
+        this.userService.getUser(cred.user.uid)
+      );
+
       console.log('Datos del usuario:', userData);
 
       // Redirige a la página de inicio para usuarios
-      this.router.navigate(['/homepage-user']);
-    } catch (error : unknown) {
+      if (userData?.rol == 'usuario') {
+        this.router.navigate(['/homepage-user']);
+      } else {
+        this.router.navigate(['/homepage-admin']);
+      }
+      return;
+    } catch (error: unknown) {
       console.error('Error durante el inicio de sesión:', error);
 
       if (error instanceof Error) {
@@ -62,8 +70,9 @@ export class LoginPage implements OnInit {
       } else {
         console.error('Error desconocido:', error);
         alert('Ocurrió un error inesperado.');
+      }
     }
-  }}
+  }
 
   goToRegister() {
     this.router.navigate(['/register']);
@@ -73,7 +82,12 @@ export class LoginPage implements OnInit {
     this.router.navigate(['/forget-password']);
   }
 
-  goToUserHome() {
-    this.router.navigate(['/homepage-user']);
+  async goToUserHome() {
+    const uid = await this.authService.getUserId();
+    const userData = await this.userService.getUser(uid).toPromise();
+    if (userData?.rol == 'user') {
+      return this.router.navigate(['/homepage-user']);
+    }
+    return this.router.navigate(['/homepage-admin']);
   }
 }

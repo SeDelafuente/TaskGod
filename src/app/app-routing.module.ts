@@ -66,7 +66,7 @@ const routes: Routes = [
       import('./pages/Admin/homepage-admin/homepage-admin.module').then(
         (m) => m.HomepageAdminPageModule
       ),
-    canActivate: [authGuard, roleGuard],
+    canActivate: [authGuard],
   },
   {
     path: 'diary',
