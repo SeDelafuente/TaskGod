@@ -42,4 +42,18 @@
     font-size: 1rem;
     color: #333;
   }
+
+  .custom-alert .alert-message {
+    text-align: left;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #333;
+  }
+
+  .custom-alert .alert-header {
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
 }
