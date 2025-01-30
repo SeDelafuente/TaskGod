@@ -1,42 +1,70 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
+import { user } from 'src/app/models/user.model';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.page.html',
   styleUrls: ['./users.page.scss'],
-  standalone: false
+  standalone: false,
 })
-export class UsersPage implements OnInit{
+export class UsersPage implements OnInit {
+  users: user[] = [];
+
+  constructor(
+    private router: Router,
+    private userService: UserService,
+    private alertController: AlertController
+  ) {}
+
   ngOnInit(): void {
-
+    this.loadUsers();
   }
 
-  users = [
-    { id: '1', username: 'usuario1' },
-    { id: '2', username: 'usuario2' },
-    { id: '3', username: 'usuario3' },
-    { id: '4', username: 'usuario4' },
-    { id: '5', username: 'usuario5' },
-  ];
-
-  constructor(private router: Router) {}
-
-  blockUser(user: any) {
-    alert(`Usuario ${user.username} bloqueado.`);
-    // Aquí se implementaría la lógica para bloquear al usuario.
+  // Cargar lista de usuarios desde Firestore
+  loadUsers() {
+    this.userService.getAllUsers().subscribe((data) => {
+      this.users = data;
+    });
   }
 
-  deleteUser(user: any) {
-    const index = this.users.indexOf(user);
-    if (index > -1) {
-      this.users.splice(index, 1);
-      alert(`Usuario ${user.username} eliminado.`);
-    }
+  // Eliminar usuario
+  async deleteUser(user: user) {
+    const alert = await this.alertController.create({
+      header: 'Confirmar',
+      message: `¿Estás seguro de que deseas eliminar a ${user.name}?`,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Eliminar',
+          handler: async () => {
+            try {
+              await this.userService.deleteUser(user.uid);
+              this.presentAlert('Éxito', `Usuario ${user.name} eliminado.`);
+              this.loadUsers(); // Refrescar lista de usuarios
+            } catch (error) {
+              this.presentAlert('Error', 'No se pudo eliminar al usuario.');
+            }
+          },
+        },
+      ],
+    });
+    await alert.present();
   }
 
-  goToHelp() {
-    this.router.navigate(['/help']);
+  // Mostrar un ion-alert con mensajes personalizados
+  async presentAlert(header: string, message: string) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['Aceptar'],
+    });
+    await alert.present();
   }
 
   goToLogin() {
