@@ -48,8 +48,7 @@ export class RegisterPage implements OnInit {
   }
 
   togglePasswordType() {
-    this.passwordType =
-      this.passwordType === 'password' ? 'text' : 'password';
+    this.passwordType = this.passwordType === 'password' ? 'text' : 'password';
   }
 
   async onSubmit() {
@@ -60,9 +59,25 @@ export class RegisterPage implements OnInit {
         await this.authService.register(userData);
         await this.showAlert('Éxito', 'Tu cuenta ha sido creada con éxito.');
         this.router.navigate(['/login']); // Redirigir al login
-      } catch (error) {
+      } catch (error: any) {
         console.error('Error al registrar usuario:', error);
-        await this.showAlert('Error', 'No se pudo crear tu cuenta. Intenta nuevamente.');
+        console.error(`${JSON.stringify(error)}`);
+
+        if (
+          error?.message?.includes(
+            'The email address is already in use by another account'
+          )
+        ) {
+          return await this.showAlert(
+            'Aviso',
+            'Correo ya en uso, intenta recuperar contraseña'
+          );
+        }
+
+        return await this.showAlert(
+          'Error',
+          'No se pudo crear tu cuenta. Intenta nuevamente.'
+        );
       }
     }
   }
